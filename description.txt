@@ -1,0 +1,12 @@
+Coptic culture mod based on the More Bookmarks+ but with copts being in the byzantine culture group.
+
+Spritual Traditions.
+Culture traditions : 
+- Strong Believers
+- Agrarian
+- Monastic Communities
+- Expert Artisans
+
+You will have to use the ruler designer as there is no Coptic ruler in Egypt.
+
+Github : https://github.com/pierresaid/coptic-culture-ck3
