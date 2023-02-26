@@ -460,7 +460,7 @@
 
 ###c_sinai
 6033 = {	#AT-TUR
-	culture = levantine
+	culture = bedouin
 	religion = ashari
 	holding = castle_holding
 	909.1.1 = {
@@ -485,7 +485,7 @@
 
 ###c_firaun
 6030 = {	#FIRAUN
-	culture = levantine
+	culture = bedouin
 	religion = ashari
 	holding = castle_holding
 }
