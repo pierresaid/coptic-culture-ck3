@@ -1,4 +1,6 @@
-Coptic culture mod based on the More Bookmarks+ but with copts being in the byzantine culture group.
+This mod adds the Coptic culture to the game.
+
+The culture is in the Byzantine culture group, and the game starts with a few Coptic provinces in Egypt.
 
 Spritual Traditions.
 Culture traditions : 
@@ -6,6 +8,8 @@ Culture traditions :
 - Agrarian
 - Monastic Communities
 - Expert Artisans
+
+The mod includes modified Coptic province and ruler names. Work in progress.
 
 You will have to use the ruler designer as there is no Coptic ruler in Egypt.
 

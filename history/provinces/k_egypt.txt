@@ -163,7 +163,7 @@
 
 ###c_al-buhaira
 6052 = {	#RASHID
-	culture = egyptian
+	culture = coptic
 	religion = coptic
 	holding = castle_holding
 	900.1.1 = {
@@ -180,7 +180,7 @@
 
 ###c_al-gharbiya
 6051 = {	#MINUF
-	culture = egyptian
+	culture = coptic
 	religion = coptic
 	holding = castle_holding
 	900.1.1 = {

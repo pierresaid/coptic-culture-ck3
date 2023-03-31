@@ -65,16 +65,16 @@ coptic = {
 		tradition_artisans
 	}
 	
-	name_list = name_list_greek
+	name_list = name_list_coptic
 	
 	coa_gfx = { byzantine_group_coa_gfx western_coa_gfx }
-	building_gfx = { arabic_group_building_gfx mena_building_gfx }
-	clothing_gfx = { byzantine_clothing_gfx mena_clothing_gfx }
+	building_gfx = { mediterranean_building_gfx }
+	clothing_gfx = { byzantine_clothing_gfx }
 	unit_gfx = { eastern_unit_gfx }
 	
 	ethnicities = {
-		6 = mediterranean_byzantine
-		4 = arab
+		8 = mediterranean_byzantine
+		2 = arab
 	}
 }
 

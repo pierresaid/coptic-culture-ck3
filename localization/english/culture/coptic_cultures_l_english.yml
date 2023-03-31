@@ -1,3 +1,4 @@
 ﻿l_english:
- coptic:0 "Coptic"
- coptic_collective_noun:1 "Copts"
+ coptic: "Coptic"
+ coptic_prefix: "Copto"
+ coptic_collective_noun: "Copts"
