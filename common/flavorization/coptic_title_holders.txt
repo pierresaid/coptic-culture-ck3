@@ -1,0 +1,26 @@
+﻿### Coptic ###
+king_feudal_male_coptic = {
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	priority = 47
+	governments = { feudal_government }
+	name_lists = { name_list_coptic }
+}
+king_feudal_female_coptic = {
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	priority = 47
+	governments = { feudal_government }
+	name_lists = { name_list_coptic }
+}
+kingdom_feudal_coptic = {
+	type = title
+	tier = kingdom
+	priority = 47
+	governments = { feudal_government }
+	name_lists = { name_list_coptic }
+}

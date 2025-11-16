@@ -1,0 +1,756 @@
+	k_egypt = {
+		color = { 10 255 80 }
+
+		capital	= c_cairo
+        cultural_names = {
+			name_list_coptic = "Kime"
+		}
+
+		ai_primary_priority = {
+			if = {
+				limit = {
+					culture = culture:egyptian
+				}
+				add = @correct_culture_primary_score
+			}
+			if = {
+				limit = {
+					culture = { has_cultural_pillar = heritage_arabic }
+				}
+				add = @better_than_the_alternatives_score
+			}
+		}
+
+		d_cyrenaica = {
+			color = { 32 150 63 }
+
+			capital = c_barqa # Cyrenaica
+
+			c_barqa = {
+				color = { 34 152 65 }
+
+				b_barqa-al-marj = {
+					province = 6104
+
+					color = { 34 152 65 }
+				}
+				b_wadi_masus = {
+					province = 6102
+
+					color = { 34 152 65 }
+				}
+				b_jabal_al-gharbi = {
+					province = 6103
+
+					color = { 34 152 65 }
+				}
+				b_benghazi = {
+					province = 6105
+
+					color = { 34 152 65 }
+				}
+			}
+			c_awjila = {
+				color = { 36 154 67 }
+
+				b_awjila = {
+					province = 6106
+
+					color = { 36 154 67 }
+				}
+				b_jalu = {
+					province = 6107
+
+					color = { 36 154 67 }
+				}
+				b_jakharrad = {
+					province = 6108
+
+					color = { 36 154 67 }
+				}
+			}
+			c_derna = {
+				color = { 38 156 69 }
+
+				b_derna = {
+					province = 6099
+
+					color = { 38 156 69 }
+				}
+				b_wadi_makhil = {
+					province = 6100
+
+					color = { 38 156 69 }
+				}
+				b_marawa = {
+					province = 6101
+
+					color = { 38 156 69 }
+				}
+			}
+			c_tobruk = {
+				color = { 40 158 71 }
+
+				b_tobruk = {
+					province = 6098
+
+					color = { 40 158 71 }
+				}
+			}
+		}
+
+		d_alexandria = {
+			color = { 100 219 134 }
+
+			capital = c_alexandria
+            cultural_names = {
+				name_list_coptic = "Niphaiat"
+			}
+
+			c_alexandria = {
+				color = { 102 221 136 }
+
+                cultural_names = {
+					name_list_coptic = "Rakote"
+				}
+
+				#b_alexandria = {
+				#	pentarchy = yes
+				#}
+				b_alexandria = {
+					province = 6053
+                    cultural_names = {
+						name_list_coptic = "Rakote"
+					}
+
+					color = { 102 221 136 }
+				}
+				b_al-hamam = {
+					province = 6094
+                    cultural_names = {
+						name_list_coptic = "Heimo"
+					}
+
+					color = { 102 221 136 }
+				}
+				b_wadi_natrun = {
+					province = 6116
+                    cultural_names = {
+						name_list_coptic = "Shehit"
+					}
+
+					color = { 102 221 136 }
+				}
+			}
+			c_sullum = { #AKA Marmarica
+				color = { 104 223 138 }
+
+				b_sullum = {
+					province = 6097
+
+					color = { 104 223 138 }
+				}
+				b_qasr_ash-shams = {
+					province = 6095
+
+					color = { 104 223 138 }
+				}
+				b_kanais_al-hadid = {
+					province = 6096
+
+					color = { 104 223 138 }
+				}
+			}
+			c_siwa = {
+				color = { 106 225 140 }
+
+				b_siwa = {
+					province = 6093
+
+					color = { 106 225 140 }
+				}
+				b_ain_al-gharbi = {
+					province = 6092
+
+					color = { 106 225 140 }
+				}
+				b_qara = {
+					province = 6117
+                    cultural_names = {
+						name_list_coptic = "Kara"
+					}
+
+					color = { 106 225 140 }
+				}
+			}
+		}
+
+		d_delta = {
+			color = { 3 255 74 }
+
+			capital = c_damietta
+
+			c_damietta = {
+				color = { 12 255 83 }
+                cultural_names = {
+					name_list_coptic = "Dumiat"
+				}
+
+				b_dumiyat = {
+					province = 6046
+                    cultural_names = {
+						name_list_coptic = "Dumiat"
+					}
+
+					color = { 12 255 83 }
+				}
+				b_daqahla = {
+					province = 6043
+
+					color = { 12 255 83 }
+				}
+				b_tinnis = {
+					province = 6045
+
+					color = { 12 255 83 }
+				}
+			}
+			c_al-buhaira = {
+				color = { 61 245 114 }
+
+				b_rashid = {
+					province = 6052
+
+					color = { 61 245 114 }
+				}
+				b_damanhur = {
+					province = 6054
+                    cultural_names = {
+						name_list_coptic = "Timenhur"
+					}
+
+					color = { 61 245 114 }
+				}
+				b_ramsis = {
+					province = 6055
+
+					color = { 61 245 114 }
+				}
+			}
+			c_al-gharbiya = {
+				color = { 9 255 80 }
+
+				b_minuf = {
+					province = 6051
+
+					color = { 9 255 80 }
+				}
+				b_samannud = {
+					province = 6047
+
+					color = { 9 255 80 }
+				}
+				b_burullus = {
+					province = 6048
+
+					color = { 9 255 80 }
+				}
+				b_nastarawa = {
+					province = 6049
+
+					color = { 9 255 80 }
+				}
+				b_ibyar = {
+					province = 6050
+
+					color = { 9 255 80 }
+				}
+			}
+			c_sharkiya = {
+				color = { 41 214 91 }
+
+				b_bilbays = {
+					province = 6040
+
+					color = { 41 214 91 }
+				}
+				b_qalyub = {
+					province = 6041
+
+					color = { 41 214 91 }
+				}
+				b_faqus = {
+					province = 6044
+
+					color = { 41 214 91 }
+				}
+			}
+		}
+
+		d_cairo = {
+			color = { 32 245 138 }
+
+			capital = c_cairo
+            cultural_names = {
+				name_list_coptic = "Kashromi"
+			}
+
+			c_cairo = {
+				color = { 26 214 120 }
+
+                cultural_names = {
+					name_list_coptic = "Kashromi"
+				}
+
+				b_cairo = {
+					province = 6042
+                    cultural_names = {
+						name_list_coptic = "Kashromi"
+					}
+
+					color = { 26 214 120 }
+				}
+				b_quzlum = {
+					province = 6039
+
+					color = { 26 214 120 }
+				}
+				b_atfih = {
+					province = 6065
+
+                    cultural_names = {
+						name_list_coptic = "Petpeh"
+					}
+
+					color = { 26 214 120 }
+				}
+				b_hulwan-cairo = {
+					province = 6066
+
+					color = { 26 214 120 }
+				}
+			}
+			c_giza = {
+				color = { 2 181 91 }
+
+                cultural_names = {
+						name_list_coptic = "Tipersios"
+				}
+
+				b_gizeh = {
+					province = 6057
+
+                    cultural_names = {
+						name_list_coptic = "Tipersios"
+					}
+
+					color = { 2 181 91 }
+				}
+				b_abu_ghalib = {
+					province = 6056
+
+					color = { 2 181 91 }
+				}
+				b_busir = {
+					province = 6058
+
+					color = { 2 181 91 }
+				}
+			}
+			c_fayyum = {
+				color = { 36 156 95 }
+
+                cultural_names = {
+					name_list_coptic = "Phiom"
+				}
+
+				b_al-fayyum = {
+					province = 6060
+
+                    cultural_names = {
+						name_list_coptic = "Phiom"
+					}
+
+					color = { 36 156 95 }
+				}
+				b_tirsa = {
+					province = 6059
+
+                    cultural_names = {
+						name_list_coptic = "Terso"
+					}
+
+					color = { 36 156 95 }
+				}
+				b_iqna = {
+					province = 6061
+
+					color = { 36 156 95 }
+				}
+			}
+		}
+
+		d_al-wahat = {
+			color = { 40 160 140 }
+
+			capital = c_bahriya
+
+			c_bahriya = {
+				color = { 45 165 145 }
+
+				b_al-bahriya = {
+					province = 6089
+
+					color = { 45 165 145 }
+				}
+				b_bawiti = {
+					province = 6090
+
+					color = { 45 165 145 }
+				}
+				b_al-harra = {
+					province = 6091
+
+					color = { 45 165 145 }
+				}
+			}
+			c_farafra = {
+				color = { 34 148 129 }
+
+                cultural_names = {
+					name_list_coptic = "Ferfer"
+				}
+
+				b_al-farafra = {
+					province = 6088
+
+                    cultural_names = {
+						name_list_coptic = "Ferfer"
+					}
+
+					color = { 34 148 129 }
+				}
+			}
+			c_dakhla = {
+				color = { 108 217 168 }
+
+				b_mut = {
+					province = 6085
+
+					color = { 108 217 168 }
+				}
+				b_tunayda = {
+					province = 6086
+
+					color = { 108 217 168 }
+				}
+				b_al-qasr-dakhla = {
+					province = 6087
+
+					color = { 108 217 168 }
+				}
+			}
+			c_kharga = {
+				color = { 39 219 126 }
+                cultural_names = {
+					name_list_coptic = "Hib"
+				}
+
+				b_kharga = {
+					province = 6083
+                    cultural_names = {
+						name_list_coptic = "Hib"
+					}
+
+					color = { 39 219 126 }
+				}
+				b_baris = {
+					province = 6084
+                    cultural_names = {
+						name_list_coptic = "Koush"
+					}
+
+					color = { 39 219 126 }
+				}
+			}
+		}
+
+		d_al-said = {
+			color = { 85 217 87 }
+
+			capital = c_qus
+
+			c_qus = {
+				color = { 76 194 77 }
+
+                cultural_names = {
+					name_list_coptic = "Kos"
+				}
+
+				b_qus = {
+					province = 6077
+                    cultural_names = {
+						name_list_coptic = "Kos"
+					}
+
+					color = { 76 194 77 }
+				}
+				b_huw = {
+					province = 6074
+
+					color = { 76 194 77 }
+				}
+				b_faw = {
+					province = 6075
+
+					color = { 76 194 77 }
+				}
+				b_qina = {
+					province = 6076
+
+					color = { 76 194 77 }
+				}
+				b_armant = {
+					province = 6078
+
+					color = { 76 194 77 }
+				}
+			}
+			c_bahnasa = {
+				color = { 50 173 51 }
+
+				b_al-bahnasa = {
+					province = 6063
+
+					color = { 50 173 51 }
+				}
+				b_ahnas = {
+					province = 6062
+
+					color = { 50 173 51 }
+				}
+				b_ihrit = {
+					province = 6064
+
+					color = { 50 173 51 }
+				}
+			}
+			c_ushmun = {
+				color = { 72 176 73 }
+
+				b_al-ushmunain = {
+					province = 6067
+
+					color = { 72 176 73 }
+				}
+				b_ansina = {
+					province = 6068
+
+					color = { 72 176 73 }
+				}
+				b_manfalut = {
+					province = 6069
+
+					color = { 72 176 73 }
+				}
+			}
+			c_asyut = {
+				color = { 39 194 40 }
+
+                cultural_names = {
+					name_list_coptic = "Siowt"
+				}
+
+				b_asyut = {
+					province = 6070
+
+                    cultural_names = {
+						name_list_coptic = "Siowt"
+					}
+
+					color = { 39 194 40 }
+				}
+				b_bawit = {
+					province = 6071
+
+					color = { 39 194 40 }
+				}
+				b_ikhmin = {
+					province = 6072
+
+					color = { 39 194 40 }
+				}
+				b_ibshaya = {
+					province = 6073
+
+					color = { 39 194 40 }
+				}
+			}
+			c_aswan = {
+				color = { 16 163 17 }
+
+                cultural_names = {
+					name_list_coptic = "Swan"
+				}
+
+				b_aswan = {
+					province = 6081
+
+                    cultural_names = {
+						name_list_coptic = "Swan"
+					}
+
+					color = { 16 163 17 }
+				}
+				b_udfu = {
+					province = 6079
+
+					color = { 16 163 17 }
+				}
+				b_zarnikh = {
+					province = 6080
+
+					color = { 16 163 17 }
+				}
+				b_aswan-west = {
+					province = 6082
+
+					color = { 16 163 17 }
+				}
+			}
+		}
+
+		d_eastern_desert = {
+			color = { 40 200 140 }
+
+			capital = c_qusayr
+
+			c_qusayr = {
+				color = { 45 205 135 }
+
+				b_qusayr = {
+					province = 6109
+
+					color = { 45 205 135 }
+				}
+				b_safaga = {
+					province = 6122
+
+					color = { 45 205 135 }
+				}
+			}
+			c_jabal_quzlum = {
+				color = { 45 195 130 }
+
+				b_north_jbl_quzlum = {
+					province = 6118
+
+					color = { 45 195 130 }
+				}
+				b_central_jbl_quzlum = {
+					province = 6119
+
+					color = { 45 195 130 }
+				}
+				b_south_jbl_quzlum = {
+					province = 6120
+
+					color = { 45 195 130 }
+				}
+				b_um_shashoba = {
+					province = 6121
+
+					color = { 45 195 130 }
+				}
+			}
+		}
+
+		d_sinai = {
+			color = { 88 99 2 }
+
+			capital = c_farama
+
+            cultural_names = {
+				name_list_coptic = "Sina"
+			}
+
+			c_farama = {
+				color = { 141 198 5 }
+
+                cultural_names = {
+					name_list_coptic = "Kasios"
+				}
+
+				b_farama = {
+					province = 6038
+
+                    cultural_names = {
+						name_list_coptic = "Kasios"
+					}
+
+					color = { 141 198 5 }
+				}
+				b_warrada = {
+					province = 6036
+
+					color = { 141 198 5 }
+				}
+				b_al-arish = {
+					province = 5970
+
+					color = { 141 198 5 }
+				}
+			}
+			c_sinai = {
+				color = { 143 201 8 }
+
+                cultural_names = {
+					name_list_coptic = "Sina"
+				}
+
+				b_at-tur = {
+					province = 6033
+
+					color = { 143 201 8 }
+				}
+				b_stcatherine = {
+					province = 6032
+
+                    cultural_names = {
+						name_list_coptic = "Agia Katrin"
+					}
+
+					color = { 143 201 8 }
+				}
+				b_faran = {
+					province = 6034
+
+					color = { 143 201 8 }
+				}
+				b_qalat_jundi = {
+					province = 6035
+
+					color = { 143 201 8 }
+				}
+				b_tih = {
+					province = 6037
+
+					color = { 143 201 8 }
+				}
+			}
+			c_firaun = {
+				color = { 145 203 10 }
+
+				b_firaun = {
+					province = 6030
+
+					color = { 145 203 10 }
+				}
+				b_dahab = {
+					province = 6031
+
+					color = { 145 203 10 }
+				}
+			}
+		}
+	}

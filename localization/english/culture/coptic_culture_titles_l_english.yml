@@ -1,6 +1,6 @@
 ﻿l_english:
- king_feudal_male_coptic: "Pouro"
- king_feudal_female_coptic: "Tiouro"
- kingdom_feudal_coptic: "Metouro"
+ king_feudal_male_coptic:0 "Pouro"
+ king_feudal_female_coptic:0 "Tiouro"
+ kingdom_feudal_coptic:0 "Metouro"
 #  emperor_feudal_male_coptic:0 "Basileus"
 #  emperor_feudal_female_coptic:0 "Basilissa"

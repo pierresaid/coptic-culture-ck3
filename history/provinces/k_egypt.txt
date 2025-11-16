@@ -1,4 +1,4 @@
-﻿#k_egypt
+#k_egypt
 ##d_cyrenaica ###################################
 ###c_barqa
 6104 = {	#BARQA-AL-MARJ
@@ -106,9 +106,15 @@
 	1066.1.1 = {
 		buildings = {
 			common_tradeport_02
-			orchards_01
+			#orchards_01
 			military_camps_01
 		}
+	}
+
+	# History
+
+	effect = {
+		add_travel_point_of_interest = poi_lighthouse_of_alexandria
 	}
 }
 6094 = {	#AL-HAMAM
@@ -175,7 +181,6 @@
 }
 6055 = {	#RAMSIS
 	#holding = none
-	culture = coptic
 }
 
 ###c_al-gharbiya
@@ -223,8 +228,10 @@
 	religion = ashari
 	holding = castle_holding
 	#867.1.1 = { name = "Fustat" }
+	860.1.1 = {
+		special_building_slot = al_azhar_university
+	}
 	970.1.1 = {
-		#special_building_slot = al_azhar_university
 		special_building = al_azhar_university
 	}
 	#969.1.1 = {
@@ -236,9 +243,9 @@
 	1066.1.1 = {
 		buildings = {
 			cereal_fields_02
-			orchards_01
+			#orchards_01
 			regimental_grounds_01
-			camel_farms_01
+			#camel_farms_01
 		}
 	}
 }
@@ -393,7 +400,6 @@
 }
 6072 = {	#IKHMIN
 	holding = city_holding
-	culture = coptic
 }
 6073 = {	#IBSHAYA
 	#holding = none
@@ -472,6 +478,10 @@
 }
 6032 = {	#SAINT CATHERINE
 	holding = church_holding
+	565.1.1 = {
+		special_building_slot = saint_catherine
+		special_building = saint_catherine
+	}
 }
 6034 = {	#FARAN
 	#holding = none
