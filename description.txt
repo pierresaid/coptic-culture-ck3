@@ -12,8 +12,8 @@ Culture traditions :
 The mod includes modified Coptic province and ruler names.
 
 Custom Men at Arms for Coptic culture :
-- Coptic Spearmen (Pikemen)
-- Coptic Archers (Bowmen)
+- Coptic Spearmen
+- Coptic Archers
 - Alexandrian Guard (Heavy Infantry)
 
 You will have to use the ruler designer as there is no Coptic ruler in Egypt.
