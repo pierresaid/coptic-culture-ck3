@@ -1,0 +1,131 @@
+﻿# standard costs
+@maa_buy_cost = 150
+@maa_low_maintenance_cost = 1.0
+@maa_high_maintenance_cost = 5.0
+@cultural_maa_extra_ai_score = 80 # Equivalent to having 8 extra regiments beyond what the code scoring would indicate
+
+# Must be synced between files with the values located at "# Provisions Costs #".
+@provisions_cost_infantry_cheap = 3
+@provisions_cost_infantry_moderate = 7
+@provisions_cost_infantry_expensive = 12
+@provisions_cost_infantry_bankrupting = 15
+
+@provisions_cost_cavalry_cheap = 7
+@provisions_cost_cavalry_moderate = 15
+@provisions_cost_cavalry_expensive = 21
+@provisions_cost_cavalry_bankrupting = 30
+
+@provisions_cost_special_cheap = 6
+@provisions_cost_special_moderate = 12
+@provisions_cost_special_expensive = 18
+@provisions_cost_special_bankrupting = 24
+
+coptic_spearmen = {
+	type = pikemen
+
+	damage = 26
+	toughness = 26
+	pursuit = 0
+	screen = 0
+
+	terrain_bonus = {
+		mountains = { toughness = 12 }
+		desert_mountains = { toughness = 12 }
+		hills = { toughness = 8 }
+		farmlands = { damage = 4 toughness = 4 }
+		floodplains = { damage = 4 toughness = 4 }
+	}
+
+	counters = {
+		light_cavalry = 1
+		heavy_cavalry = 1
+		peasant_militia = 1
+		camel_cavalry = 1
+		elephant_cavalry = 1
+	}
+
+	can_recruit = {
+		culture = culture:coptic
+	}
+
+	buy_cost = { gold = coptic_spearmen_recruitment_cost }
+	low_maintenance_cost = { gold = coptic_spearmen_low_maint_cost }
+	high_maintenance_cost = { gold = coptic_spearmen_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = pikemen
+}
+
+coptic_archers = {
+	type = archers
+
+	damage = 32
+	toughness = 14
+	pursuit = 10
+	screen = 0
+
+	terrain_bonus = {
+		hills = { damage = 10 toughness = 10 }
+		desert = { damage = 6 toughness = 10 }
+		drylands = { damage = 6 toughness = 10 }
+		floodplains = { damage = 4 toughness = 10 }
+	}
+
+	counters = {
+		skirmishers = 1
+	}
+
+	can_recruit = {
+		culture = culture:coptic
+	}
+
+	buy_cost = { gold = coptic_archers_recruitment_cost }
+	low_maintenance_cost = { gold = coptic_archers_low_maint_cost }
+	high_maintenance_cost = { gold = coptic_archers_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = bowmen
+}
+
+alexandrian_guard = {
+	type = heavy_infantry
+
+	damage = 44
+	toughness = 34
+	pursuit = 0
+	screen = 20
+
+	terrain_bonus = {
+		desert = { damage = 6 toughness = 4 }
+		floodplains = { damage = 6 toughness = 4 }
+	}
+
+	counters = {
+		pikemen = 1
+		peasant_militia = 2
+		heavy_infantry = 1
+	}
+
+	can_recruit = {
+		culture = culture:coptic
+		culture = {
+			has_innovation = innovation_house_soldiers
+		}
+		NOT = {
+			culture = { has_cultural_parameter = strength_in_numbers_heavy_maa_ban }
+		}
+	}
+
+	buy_cost = { gold = alexandrian_guard_recruitment_cost }
+	low_maintenance_cost = { gold = alexandrian_guard_low_maint_cost }
+	high_maintenance_cost = { gold = alexandrian_guard_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_moderate
+
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = palace_guards
+}

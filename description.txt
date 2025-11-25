@@ -1,6 +1,6 @@
 This mod adds the Coptic culture to the game.
 
-The culture is in the Byzantine culture group, and the game starts with a few Coptic provinces in Egypt.
+The culture is in the Egyptian culture group, and the game starts with a few Coptic provinces in Egypt.
 
 Spritual Traditions.
 Culture traditions : 
@@ -9,7 +9,12 @@ Culture traditions :
 - Monastic Communities
 - Expert Artisans
 
-The mod includes modified Coptic province and ruler names. Work in progress.
+The mod includes modified Coptic province and ruler names.
+
+Custom Men at Arms for Coptic culture :
+- Coptic Spearmen (Pikemen)
+- Coptic Archers (Bowmen)
+- Alexandrian Guard (Heavy Infantry)
 
 You will have to use the ruler designer as there is no Coptic ruler in Egypt.
 
