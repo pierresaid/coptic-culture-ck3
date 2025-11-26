@@ -4,23 +4,23 @@ king_feudal_male_coptic = {
 	gender = male
 	special = holder
 	tier = kingdom
-	priority = 47
-	governments = { feudal_government }
+	priority = 50
 	name_lists = { name_list_coptic }
+	governments = { feudal_government clan_government tribal_government administrative_government }
 }
 king_feudal_female_coptic = {
 	type = character
 	gender = female
 	special = holder
 	tier = kingdom
-	priority = 47
-	governments = { feudal_government }
+	priority = 50
 	name_lists = { name_list_coptic }
+	governments = { feudal_government clan_government tribal_government administrative_government }
 }
 kingdom_feudal_coptic = {
 	type = title
 	tier = kingdom
-	priority = 47
-	governments = { feudal_government }
+	priority = 50
 	name_lists = { name_list_coptic }
+	governments = { feudal_government clan_government tribal_government administrative_government }
 }

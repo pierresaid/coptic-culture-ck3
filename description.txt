@@ -14,7 +14,7 @@ The mod includes modified Coptic province and ruler names.
 Custom Men at Arms for Coptic culture :
 - Coptic Spearmen
 - Coptic Archers
-- Alexandrian Guard (Heavy Infantry)
+- Alexandrian Guard - Heavy Infantry (Need to unlock Household Soldiers first)
 
 You will have to use the ruler designer as there is no Coptic ruler in Egypt.
 
