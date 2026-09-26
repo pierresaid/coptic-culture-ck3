@@ -67,10 +67,10 @@ coptic_archers = {
 	screen = 0
 
 	terrain_bonus = {
-		hills = { damage = 10 toughness = 10 }
-		desert = { damage = 6 toughness = 10 }
-		drylands = { damage = 6 toughness = 10 }
-		floodplains = { damage = 4 toughness = 10 }
+		hills = { damage = 10 toughness = 4 }
+		desert = { damage = 6 toughness = 4 }
+		drylands = { damage = 6 toughness = 4 }
+		floodplains = { damage = 6 toughness = 6 }
 	}
 
 	counters = {
@@ -95,7 +95,7 @@ alexandrian_guard = {
 	type = heavy_infantry
 
 	damage = 44
-	toughness = 34
+	toughness = 30
 	pursuit = 0
 	screen = 20
 

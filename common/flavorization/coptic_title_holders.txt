@@ -24,3 +24,43 @@ kingdom_feudal_coptic = {
 	name_lists = { name_list_coptic }
 	governments = { feudal_government clan_government tribal_government administrative_government }
 }
+
+# Offices attested in Coptic documents of Byzantine and early Islamic Egypt.
+# Male only: no attested feminine forms, so female rulers keep the vanilla titles.
+# Lashane: village headman (Coptic)
+baron_feudal_male_coptic = {
+	type = character
+	gender = male
+	special = holder
+	tier = barony
+	priority = 10
+	name_lists = { name_list_coptic }
+	governments = { feudal_government clan_government administrative_government }
+}
+# Pagarch: governor of a pagarchy (district)
+count_feudal_male_coptic = {
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	priority = 20
+	name_lists = { name_list_coptic }
+	governments = { feudal_government clan_government administrative_government }
+}
+county_feudal_coptic = {
+	type = title
+	tier = county
+	priority = 20
+	name_lists = { name_list_coptic }
+	governments = { feudal_government clan_government administrative_government }
+}
+# Doux: military governor of a province (e.g. the doux of the Thebaid)
+duke_feudal_male_coptic = {
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	priority = 30
+	name_lists = { name_list_coptic }
+	governments = { feudal_government clan_government administrative_government }
+}
