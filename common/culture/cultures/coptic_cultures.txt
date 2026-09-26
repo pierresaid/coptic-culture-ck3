@@ -16,8 +16,9 @@
 	name_list = name_list_coptic
 
 	coa_gfx = { latin_group_coa_gfx western_coa_gfx }
-	building_gfx = { byzantine_building_gfx mena_building_gfx }
-	clothing_gfx = { byzantine_clothing_gfx mena_clothing_gfx }
+	# A gfx sequence must match every other culture starting with the same key (vanilla greek uses these alone)
+	building_gfx = { byzantine_building_gfx }
+	clothing_gfx = { byzantine_clothing_gfx }
 	unit_gfx = { mena_unit_gfx }
 	house_coa_frame = house_frame_02
 	house_coa_mask_offset = { 0.0 0.055 }

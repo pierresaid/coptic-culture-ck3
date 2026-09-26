@@ -1,0 +1,7 @@
+﻿# Coptic culture, or any culture that diverged from or hybridized with it
+coptic_culture_or_descendant_trigger = {
+	OR = {
+		culture = culture:coptic
+		culture = { any_parent_culture_or_above = { this = culture:coptic } }
+	}
+}

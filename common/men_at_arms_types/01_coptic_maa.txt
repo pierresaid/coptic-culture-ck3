@@ -45,7 +45,7 @@ coptic_spearmen = {
 	}
 
 	can_recruit = {
-		culture = culture:coptic
+		coptic_culture_or_descendant_trigger = yes
 	}
 
 	buy_cost = { gold = coptic_spearmen_recruitment_cost }
@@ -78,7 +78,7 @@ coptic_archers = {
 	}
 
 	can_recruit = {
-		culture = culture:coptic
+		coptic_culture_or_descendant_trigger = yes
 	}
 
 	buy_cost = { gold = coptic_archers_recruitment_cost }
@@ -111,7 +111,7 @@ alexandrian_guard = {
 	}
 
 	can_recruit = {
-		culture = culture:coptic
+		coptic_culture_or_descendant_trigger = yes
 		culture = {
 			has_innovation = innovation_house_soldiers
 		}

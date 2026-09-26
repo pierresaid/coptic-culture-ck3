@@ -1,8 +1,8 @@
 This mod adds the Coptic culture to the game.
 
-The culture is in the Egyptian culture group, and the game starts with a few Coptic provinces in Egypt.
+The culture has the Egyptian heritage, and the game starts with a few Coptic provinces in Egypt.
 
-Spritual Traditions.
+Spiritual ethos.
 Culture traditions : 
 - Strong Believers
 - Agrarian

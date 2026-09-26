@@ -1,3 +1,6 @@
+# Full override of vanilla history/provinces/k_egypt.txt (in sync with CK3 1.19.0.6).
+# The only change from vanilla is 'culture = coptic' on provinces 6053, 6046, 6052, 6051, 6077, 6070, 6081.
+# Re-copy the vanilla file and re-apply those lines after every game patch.
 #k_egypt
 ##d_cyrenaica ###################################
 ###c_barqa

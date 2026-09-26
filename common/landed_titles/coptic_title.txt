@@ -3,15 +3,55 @@
 @always_primary_score = 1000
 @never_primary_score = -1000
 
+# Copy of vanilla e_arabia/k_egypt (CK3 1.19.0.6 common/landed_titles/00_landed_titles.txt)
+# with Coptic cultural names added.
+# k_egypt MUST stay nested in e_arabia: a title redefined at the top level of a later
+# file loses its de jure liege, which removed Egypt from the Arabian Empire.
+# Only the e_arabia properties are copied here; its other kingdoms are untouched.
+
+e_arabia = {
+	color = { 32 150 85 }
+
+	capital = c_damascus # Damascus
+
+	can_destroy = {
+		custom_tooltip = {
+			text = persian_struggle.tt.forbid_title_destruction
+			NOT = { exists = struggle:persian_struggle }
+		}
+	}
+
+	definite_form = yes
+
+	can_create = {
+		rule_title_creation_imperial_power_projection_title_creation_trigger = yes
+	}
+
+	ai_primary_priority = {
+		if = {
+			limit = {
+				culture = { has_cultural_pillar = heritage_arabic }
+			}
+			add = @correct_culture_primary_score
+		}
+	}
+
 	k_egypt = {
 		color = { 10 255 80 }
 
-		capital	= c_cairo
-        cultural_names = {
-			name_list_coptic = "Kime"
+		cultural_names = {
+			name_list_coptic = cn_coptic_kime
 		}
 
+		capital	= c_cairo
+
 		ai_primary_priority = {
+			if = {
+				limit = {
+					culture = culture:coptic
+				}
+				add = @correct_culture_primary_score
+			}
 			if = {
 				limit = {
 					culture = culture:egyptian
@@ -107,16 +147,17 @@
 		d_alexandria = {
 			color = { 100 219 134 }
 
-			capital = c_alexandria
-            cultural_names = {
-				name_list_coptic = "Niphaiat"
+			cultural_names = {
+				name_list_coptic = cn_coptic_niphaiat
 			}
+
+			capital = c_alexandria
 
 			c_alexandria = {
 				color = { 102 221 136 }
 
-                cultural_names = {
-					name_list_coptic = "Rakote"
+				cultural_names = {
+					name_list_coptic = cn_coptic_rakote
 				}
 
 				#b_alexandria = {
@@ -124,24 +165,27 @@
 				#}
 				b_alexandria = {
 					province = 6053
-                    cultural_names = {
-						name_list_coptic = "Rakote"
+
+					cultural_names = {
+						name_list_coptic = cn_coptic_rakote
 					}
 
 					color = { 102 221 136 }
 				}
 				b_al-hamam = {
 					province = 6094
-                    cultural_names = {
-						name_list_coptic = "Heimo"
+
+					cultural_names = {
+						name_list_coptic = cn_coptic_heimo
 					}
 
 					color = { 102 221 136 }
 				}
 				b_wadi_natrun = {
 					province = 6116
-                    cultural_names = {
-						name_list_coptic = "Shehit"
+
+					cultural_names = {
+						name_list_coptic = cn_coptic_shehit
 					}
 
 					color = { 102 221 136 }
@@ -181,8 +225,9 @@
 				}
 				b_qara = {
 					province = 6117
-                    cultural_names = {
-						name_list_coptic = "Kara"
+
+					cultural_names = {
+						name_list_coptic = cn_coptic_kara
 					}
 
 					color = { 106 225 140 }
@@ -197,14 +242,16 @@
 
 			c_damietta = {
 				color = { 12 255 83 }
-                cultural_names = {
-					name_list_coptic = "Dumiat"
+
+				cultural_names = {
+					name_list_coptic = cn_coptic_dumiat
 				}
 
 				b_dumiyat = {
 					province = 6046
-                    cultural_names = {
-						name_list_coptic = "Dumiat"
+
+					cultural_names = {
+						name_list_coptic = cn_coptic_dumiat
 					}
 
 					color = { 12 255 83 }
@@ -230,8 +277,9 @@
 				}
 				b_damanhur = {
 					province = 6054
-                    cultural_names = {
-						name_list_coptic = "Timenhur"
+
+					cultural_names = {
+						name_list_coptic = cn_coptic_timenhur
 					}
 
 					color = { 61 245 114 }
@@ -295,22 +343,24 @@
 		d_cairo = {
 			color = { 32 245 138 }
 
-			capital = c_cairo
-            cultural_names = {
-				name_list_coptic = "Kashromi"
+			cultural_names = {
+				name_list_coptic = cn_coptic_kashromi
 			}
+
+			capital = c_cairo
 
 			c_cairo = {
 				color = { 26 214 120 }
 
-                cultural_names = {
-					name_list_coptic = "Kashromi"
+				cultural_names = {
+					name_list_coptic = cn_coptic_kashromi
 				}
 
 				b_cairo = {
 					province = 6042
-                    cultural_names = {
-						name_list_coptic = "Kashromi"
+
+					cultural_names = {
+						name_list_coptic = cn_coptic_kashromi
 					}
 
 					color = { 26 214 120 }
@@ -323,8 +373,8 @@
 				b_atfih = {
 					province = 6065
 
-                    cultural_names = {
-						name_list_coptic = "Petpeh"
+					cultural_names = {
+						name_list_coptic = cn_coptic_petpeh
 					}
 
 					color = { 26 214 120 }
@@ -338,15 +388,15 @@
 			c_giza = {
 				color = { 2 181 91 }
 
-                cultural_names = {
-						name_list_coptic = "Tipersios"
+				cultural_names = {
+					name_list_coptic = cn_coptic_tipersios
 				}
 
 				b_gizeh = {
 					province = 6057
 
-                    cultural_names = {
-						name_list_coptic = "Tipersios"
+					cultural_names = {
+						name_list_coptic = cn_coptic_tipersios
 					}
 
 					color = { 2 181 91 }
@@ -365,15 +415,15 @@
 			c_fayyum = {
 				color = { 36 156 95 }
 
-                cultural_names = {
-					name_list_coptic = "Phiom"
+				cultural_names = {
+					name_list_coptic = cn_coptic_phiom
 				}
 
 				b_al-fayyum = {
 					province = 6060
 
-                    cultural_names = {
-						name_list_coptic = "Phiom"
+					cultural_names = {
+						name_list_coptic = cn_coptic_phiom
 					}
 
 					color = { 36 156 95 }
@@ -381,8 +431,8 @@
 				b_tirsa = {
 					province = 6059
 
-                    cultural_names = {
-						name_list_coptic = "Terso"
+					cultural_names = {
+						name_list_coptic = cn_coptic_terso
 					}
 
 					color = { 36 156 95 }
@@ -422,15 +472,15 @@
 			c_farafra = {
 				color = { 34 148 129 }
 
-                cultural_names = {
-					name_list_coptic = "Ferfer"
+				cultural_names = {
+					name_list_coptic = cn_coptic_ferfer
 				}
 
 				b_al-farafra = {
 					province = 6088
 
-                    cultural_names = {
-						name_list_coptic = "Ferfer"
+					cultural_names = {
+						name_list_coptic = cn_coptic_ferfer
 					}
 
 					color = { 34 148 129 }
@@ -457,22 +507,25 @@
 			}
 			c_kharga = {
 				color = { 39 219 126 }
-                cultural_names = {
-					name_list_coptic = "Hib"
+
+				cultural_names = {
+					name_list_coptic = cn_coptic_hib
 				}
 
 				b_kharga = {
 					province = 6083
-                    cultural_names = {
-						name_list_coptic = "Hib"
+
+					cultural_names = {
+						name_list_coptic = cn_coptic_hib
 					}
 
 					color = { 39 219 126 }
 				}
 				b_baris = {
 					province = 6084
-                    cultural_names = {
-						name_list_coptic = "Koush"
+
+					cultural_names = {
+						name_list_coptic = cn_coptic_koush
 					}
 
 					color = { 39 219 126 }
@@ -488,14 +541,15 @@
 			c_qus = {
 				color = { 76 194 77 }
 
-                cultural_names = {
-					name_list_coptic = "Kos"
+				cultural_names = {
+					name_list_coptic = cn_coptic_kos
 				}
 
 				b_qus = {
 					province = 6077
-                    cultural_names = {
-						name_list_coptic = "Kos"
+
+					cultural_names = {
+						name_list_coptic = cn_coptic_kos
 					}
 
 					color = { 76 194 77 }
@@ -562,15 +616,15 @@
 			c_asyut = {
 				color = { 39 194 40 }
 
-                cultural_names = {
-					name_list_coptic = "Siowt"
+				cultural_names = {
+					name_list_coptic = cn_coptic_siowt
 				}
 
 				b_asyut = {
 					province = 6070
 
-                    cultural_names = {
-						name_list_coptic = "Siowt"
+					cultural_names = {
+						name_list_coptic = cn_coptic_siowt
 					}
 
 					color = { 39 194 40 }
@@ -594,15 +648,15 @@
 			c_aswan = {
 				color = { 16 163 17 }
 
-                cultural_names = {
-					name_list_coptic = "Swan"
+				cultural_names = {
+					name_list_coptic = cn_coptic_swan
 				}
 
 				b_aswan = {
 					province = 6081
 
-                    cultural_names = {
-						name_list_coptic = "Swan"
+					cultural_names = {
+						name_list_coptic = cn_coptic_swan
 					}
 
 					color = { 16 163 17 }
@@ -673,24 +727,24 @@
 		d_sinai = {
 			color = { 88 99 2 }
 
-			capital = c_farama
-
-            cultural_names = {
-				name_list_coptic = "Sina"
+			cultural_names = {
+				name_list_coptic = cn_coptic_sina
 			}
+
+			capital = c_farama
 
 			c_farama = {
 				color = { 141 198 5 }
 
-                cultural_names = {
-					name_list_coptic = "Kasios"
+				cultural_names = {
+					name_list_coptic = cn_coptic_kasios
 				}
 
 				b_farama = {
 					province = 6038
 
-                    cultural_names = {
-						name_list_coptic = "Kasios"
+					cultural_names = {
+						name_list_coptic = cn_coptic_kasios
 					}
 
 					color = { 141 198 5 }
@@ -709,8 +763,8 @@
 			c_sinai = {
 				color = { 143 201 8 }
 
-                cultural_names = {
-					name_list_coptic = "Sina"
+				cultural_names = {
+					name_list_coptic = cn_coptic_sina
 				}
 
 				b_at-tur = {
@@ -721,8 +775,8 @@
 				b_stcatherine = {
 					province = 6032
 
-                    cultural_names = {
-						name_list_coptic = "Agia Katrin"
+					cultural_names = {
+						name_list_coptic = cn_coptic_agia_katrin
 					}
 
 					color = { 143 201 8 }
@@ -759,3 +813,4 @@
 			}
 		}
 	}
+}
