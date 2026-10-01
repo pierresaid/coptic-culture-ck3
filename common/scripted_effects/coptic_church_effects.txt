@@ -1,0 +1,13 @@
+﻿# Makes an Egyptian member of the Coptic Church a Copt, with the Egyptian Copts of their court (clergy and
+# monks), so the successors picked from that court stay Coptic.
+# Root: a character, usually the holder of d_coptic_papacy, d_et_alexandria or d_desert_fathers
+coptic_church_make_coptic_effect = {
+	if = {
+		limit = { coptic_church_egyptian_trigger = yes }
+		set_culture = culture:coptic
+	}
+	every_courtier = {
+		limit = { coptic_church_egyptian_trigger = yes }
+		set_culture = culture:coptic
+	}
+}

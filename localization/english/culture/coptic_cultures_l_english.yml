@@ -1,4 +1,4 @@
 ﻿l_english:
- # 'coptic' (the culture name) is already defined by vanilla for the Coptic faith.
+ coptic: "Coptic"
  coptic_prefix: "Copto"
  coptic_collective_noun: "Copts"

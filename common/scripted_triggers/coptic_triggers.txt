@@ -5,3 +5,9 @@ coptic_culture_or_descendant_trigger = {
 		culture = { any_parent_culture_or_above = { this = culture:coptic } }
 	}
 }
+
+# Vanilla Egyptian (Arabic) culture but a member of the Coptic Church (Coptic rite): a Copt
+coptic_church_egyptian_trigger = {
+	culture = culture:egyptian
+	rite = rite:coptic_rite
+}

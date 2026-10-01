@@ -2,11 +2,14 @@
 
 Three mod files are copies of vanilla files with Coptic changes on top:
   - common/landed_titles/coptic_title.txt  (vanilla k_egypt nested in its empire, plus Coptic cultural names)
-  - history/provinces/k_egypt.txt          (vanilla file, with some counties set to culture = coptic)
+  - history/provinces/k_egypt.txt          (vanilla file, with some counties set to the Coptic culture and rite)
   - history/cultures/coptic.txt            (vanilla history/cultures/egyptian.txt)
 
 The Coptic changes are read from the current mod files, so the mod files stay the source of truth:
 add a cultural name or a Coptic county in the mod file, then run this script after each game patch.
+A Coptic county keeps culture = coptic and rite = coptic_rite at every start date: later vanilla
+culture or religion changes in its province history are overridden and marked '# vanilla: ...'.
+The script stops with an error whenever vanilla changed in a way it cannot merge safely.
 
 Usage:
   python tools/sync_vanilla.py            rebuild the files from the installed game
@@ -88,12 +91,17 @@ def build_titles(game, version):
     """Vanilla empire properties + vanilla k_egypt, with the mod's cultural names re-injected."""
     mod_text, _, _ = read_text(MOD / TITLES)
     names = {}
-    # A title, then any lines that are not another title definition, then its cultural_names block
-    title_names = r"\n\t+([bcdk]_[\w-]+) = \{\n(?:(?!\t+[bcdk]_[\w-]+ = \{)[^\n]*\n)*?\t+cultural_names = \{\n\t+name_list_coptic = (\w+)"
+    # A title (its header line may end with a comment), then any lines that are not another title
+    # definition, then its cultural_names block
+    title_names = r"\n\t+([bcdk]_[\w-]+) = \{[^\n]*\n(?:(?!\t+[bcdk]_[\w-]+ = \{)[^\n]*\n)*?\t+cultural_names = \{\n\t+name_list_coptic = (\w+)"
     for m in re.finditer(title_names, mod_text):
         names[m.group(1)] = m.group(2)
     if not names:
         raise SyncError(f"no Coptic cultural names found in {TITLES}")
+    declared = len(re.findall(r"(?m)^[^#\n]*\bname_list_coptic\s*=", mod_text))
+    if declared != len(names):
+        raise SyncError(f"{TITLES} has {declared} name_list_coptic lines but only {len(names)} were understood; "
+                        "put name_list_coptic first in its title's own cultural_names block")
 
     vanilla, _, _ = read_text(game / "common/landed_titles/00_landed_titles.txt")
     lines = vanilla.split("\n")
@@ -107,17 +115,25 @@ def build_titles(game, version):
     while header and not header[-1].strip():
         header.pop()
     kingdom = lines[k_start:block_end(lines, k_start, "\t") + 1]
+    for i, line in enumerate(kingdom):
+        m = re.match(r"^(\t+)([bcdk]_[\w-]+) = \{", line)
+        if m and m.group(2) in names:
+            own = rf"^{m.group(1)}\tcultural_names\s*=\s*\{{"
+            if any(re.match(own, l) for l in kingdom[i:block_end(kingdom, i, m.group(1))]):
+                raise SyncError(f"vanilla {m.group(2)} now has its own cultural_names; merge name_list_coptic into it and update this script")
 
     out, pending, done = [], None, set()
     for line in kingdom:
         m = re.match(r"^(\t+)([bcdk]_[\w-]+) = \{", line)
         if m and m.group(2) in names:
             pending = (m.group(1), m.group(2))
+        if pending and line == pending[0] + "}":
+            raise SyncError(f"vanilla {pending[1]} has no {'province' if pending[1].startswith('b_') else 'color'} line of its own; update this script")
         out.append(line)
         if pending:
             indent, key = pending
-            anchor = r"^\t+province = \d+" if key.startswith("b_") else r"^\t+color = \{"
-            if re.match(anchor, line) and line.startswith(indent + "\t"):
+            anchor = rf"^{indent}\tprovince = \d+" if key.startswith("b_") else rf"^{indent}\tcolor = \{{"
+            if re.match(anchor, line):
                 out += ["", f"{indent}\tcultural_names = {{", f"{indent}\t\tname_list_coptic = {names[key]}", f"{indent}\t}}"]
                 done.add(key)
                 pending = None
@@ -134,24 +150,72 @@ def build_titles(game, version):
     return preamble + "\n" + "\n".join(header) + "\n\n" + "\n".join(out) + "\n}\n"
 
 
+def province_block(text, pid):
+    """The whole history block of a province: from its 'ID = {' line to its closing brace in column 0."""
+    return re.search(rf"(?ms)^{pid} = \{{.*?^\}}", text)
+
+
+def make_coptic(block, pid, overridden):
+    """Set every culture and religion assignment of a province block, dated ones included, to Coptic."""
+    out, date = [], "start"
+    for line in block.split("\n"):
+        code, sep, comment = line.partition("#")
+        dated = re.match(r"^\t(\d+\.\d+\.\d+) = \{", code)
+        if dated:
+            date = dated.group(1)
+        changed = []
+        def culture(m):
+            if m.group(1) != "coptic":
+                changed.append(("culture", m.group(1)))
+            return "culture = coptic"
+        def rite(m):
+            if (m.group(1), m.group(2)) != ("rite", "coptic_rite"):
+                changed.append((m.group(1), m.group(2)))
+            return "rite = coptic_rite"
+        code = re.sub(r'\bculture\s*=\s*"?(\w+)"?', culture, code)
+        code = re.sub(r'\b(rite|religion|faith)\s*=\s*"?(\w+)"?', rite, code)
+        if changed:
+            overridden += [(pid, date, key, old) for key, old in changed]
+            line = f"{code.rstrip()} # vanilla: {', '.join(old for _, old in changed)}"
+        if dated and "}" in code or re.match(r"^\t\}", code):
+            date = "start"
+        out.append(line)
+    return "\n".join(out)
+
+
 def build_provinces(game, version):
-    """Vanilla province history with the mod's Coptic provinces set to culture = coptic."""
+    """Vanilla province history with the mod's Coptic provinces set to the Coptic culture and rite at every date."""
     mod_text, _, _ = read_text(MOD / PROVINCES)
     coptic = re.findall(r"(?m)^(\d+) = \{[^\n]*\n\tculture = coptic\b", mod_text)
     if not coptic:
         raise SyncError(f"no 'culture = coptic' provinces found in {PROVINCES}")
+    others = mod_text
+    for pid in coptic:
+        others = others.replace(province_block(others, pid).group(0), "")
+    stray = re.findall(r"(?m)^[^#\n]*\bculture\s*=\s*coptic\b", others)
+    if stray:
+        raise SyncError(f"{PROVINCES}: {len(stray)} 'culture = coptic' line(s) are not the first line of a province block "
+                        "and would be lost; put each Coptic county's culture on the first line of its province block")
 
     vanilla, _, _ = read_text(game / "history/provinces/k_egypt.txt")
-    text = vanilla
+    text, overridden = vanilla, []
     for pid in coptic:
-        pattern = re.compile(rf"(?m)^({pid} = \{{[^\n]*\n\tculture = )\w+")
-        text, n = pattern.subn(r"\1coptic", text)
-        if n != 1:
+        block = province_block(text, pid)
+        if not block or not re.match(rf"{pid} = \{{[^\n]*\n\tculture = ", block.group(0)):
             raise SyncError(f"province {pid} has no leading 'culture =' line in vanilla {PROVINCES}")
+        if not re.search(r"(?m)^\t(rite|religion|faith)\s*=", block.group(0)):
+            raise SyncError(f"province {pid} has no start rite in vanilla {PROVINCES}; update this script")
+        text = text[:block.start()] + make_coptic(block.group(0), pid, overridden) + text[block.end():]
+    # Every Coptic county replaces vanilla's start culture; report anything beyond that
+    notable = [f"{pid} {date} {key} = {old}" for pid, date, key, old in overridden if (date, key) != ("start", "culture")]
+    if notable:
+        print(f"Coptic counties keep the Coptic culture and rite against vanilla: {'; '.join(notable)}")
     header = (
         f"# Generated by tools/sync_vanilla.py: full override of vanilla history/provinces/k_egypt.txt (CK3 {version}).\n"
-        f"# The only change from vanilla is 'culture = coptic' on provinces {', '.join(coptic)}.\n"
-        f"# To add a Coptic county, set its culture here, then re-run the script after each game patch.\n"
+        f"# The only changes from vanilla: provinces {', '.join(coptic)} have culture = coptic and rite = coptic_rite\n"
+        f"# at every date; the vanilla values they replace are marked '# vanilla: ...'.\n"
+        f"# To add a Coptic county, put 'culture = coptic' on the first line of its province block,\n"
+        f"# then re-run the script after each game patch.\n"
     )
     return header + text
 
@@ -204,6 +268,15 @@ def main():
                 shutil.copytree(src, dst)
             else:
                 shutil.copy2(src, dst)
+        # The launcher reads the .mod file next to the mod folder (it holds the local path): keep its versions in step
+        launcher_mod = DEPLOY_DIR.parent / "Coptic Culture.mod"
+        if launcher_mod.is_file():
+            text, bom, crlf = read_text(launcher_mod)
+            for key in ("version", "supported_version"):
+                line = re.search(rf'(?m)^{key}="[^"]*"', descriptor)
+                if line:
+                    text = re.sub(rf'(?m)^{key}="[^"]*"', line.group(0), text)
+            launcher_mod.write_bytes(encode(text, bom, crlf))
         print(f"deployed to {DEPLOY_DIR}")
 
     if args.check and changed:

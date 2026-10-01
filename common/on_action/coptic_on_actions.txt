@@ -1,0 +1,48 @@
+﻿# The Coptic Church is led by Copts. The Coptic Pope of Alexandria (d_coptic_papacy), the holder of
+# the Patriarchate of Alexandria (d_et_alexandria) and the abbot of the Desert Fathers (d_desert_fathers,
+# By God Alone only) are vanilla Egyptian (Arabic culture); they and the Egyptian Copts of their courts
+# become Coptic at game start, and every later holder of these titles does too.
+# Appended to the vanilla on_actions, so no vanilla file is overridden.
+
+# Before the lobby, so the Coptic Pope is already Coptic when picking a character
+on_game_start = {
+	on_actions = { coptic_church_on_game_start }
+}
+
+# Vanilla creates the Desert Fathers order and seeds clergy during on_game_start: catch them after the lobby
+on_game_start_after_lobby = {
+	on_actions = { coptic_church_on_game_start_after_lobby }
+}
+
+on_title_gain = {
+	on_actions = { coptic_church_on_title_gain }
+}
+
+coptic_church_on_game_start = {
+	effect = {
+		title:d_coptic_papacy.holder ?= { coptic_church_make_coptic_effect = yes }
+		title:d_et_alexandria.holder ?= { coptic_church_make_coptic_effect = yes }
+	}
+}
+
+coptic_church_on_game_start_after_lobby = {
+	effect = {
+		title:d_coptic_papacy.holder ?= { coptic_church_make_coptic_effect = yes }
+		title:d_et_alexandria.holder ?= { coptic_church_make_coptic_effect = yes }
+		title:d_desert_fathers.holder ?= { coptic_church_make_coptic_effect = yes }
+	}
+}
+
+# root = the new holder, scope:title = the title gained
+coptic_church_on_title_gain = {
+	trigger = {
+		OR = {
+			scope:title = title:d_coptic_papacy
+			scope:title = title:d_et_alexandria
+			scope:title = title:d_desert_fathers
+		}
+	}
+	effect = {
+		coptic_church_make_coptic_effect = yes
+	}
+}
