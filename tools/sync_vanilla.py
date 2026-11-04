@@ -28,7 +28,7 @@ from pathlib import Path
 MOD = Path(__file__).resolve().parent.parent
 DEFAULT_GAME = Path(r"C:/Program Files (x86)/Steam/steamapps/common/Crusader Kings III/game")
 DEPLOY_DIR = Path.home() / "Documents/Paradox Interactive/Crusader Kings III/mod/Coptic Culture"
-DEPLOY_ITEMS = ["common", "history", "localization", "descriptor.mod", "thumbnail.png"]
+DEPLOY_ITEMS = ["common", "history", "localization", "music", "gfx", "descriptor.mod", "thumbnail.png"]
 
 TITLES = "common/landed_titles/coptic_title.txt"
 PROVINCES = "history/provinces/k_egypt.txt"

@@ -1,0 +1,10 @@
+﻿category = {
+	id = "coptic_culture_soundtrack"
+	name = "coptic_culture_soundtrack_list"
+	tracks = {
+		"mx_coptic_epouro_mournful"
+		"mx_coptic_aripsalin"
+		"mx_coptic_golgotha"
+		"mx_coptic_arihoou"
+	}
+}
