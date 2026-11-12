@@ -20,9 +20,9 @@ coptic_spearmen_recruitment_cost = @[pikemen_recruitment_cost * 1.1]
 coptic_spearmen_low_maint_cost = @[pikemen_low_maint_cost * 1.1]
 coptic_spearmen_high_maint_cost = @[pikemen_high_maint_cost * 1.1]
 
-coptic_archers_recruitment_cost = @[archers_recruitment_cost * 1.2]
-coptic_archers_low_maint_cost = @[archers_low_maint_cost * 1.2]
-coptic_archers_high_maint_cost = @[archers_high_maint_cost * 1.2]
+coptic_archers_recruitment_cost = @[archers_recruitment_cost * 1.1]
+coptic_archers_low_maint_cost = @[archers_low_maint_cost * 1.1]
+coptic_archers_high_maint_cost = @[archers_high_maint_cost * 1.1]
 
 ### Cultural MAA - Alexandrian Guard (1.4x heavy infantry base)
 alexandrian_guard_recruitment_cost = @[heavy_infantry_recruitment_cost * 1.4]
