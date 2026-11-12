@@ -55,7 +55,7 @@ coptic_spearmen = {
 
 	stack = 100
 	ai_quality = { value = @cultural_maa_extra_ai_score }
-	icon = pikemen
+	icon = coptic_spearmen
 }
 
 coptic_archers = {
@@ -88,7 +88,7 @@ coptic_archers = {
 
 	stack = 100
 	ai_quality = { value = @cultural_maa_extra_ai_score }
-	icon = bowmen
+	icon = coptic_archers
 }
 
 alexandrian_guard = {
@@ -127,5 +127,5 @@ alexandrian_guard = {
 
 	stack = 100
 	ai_quality = { value = @cultural_maa_extra_ai_score }
-	icon = palace_guards
+	icon = alexandrian_guard
 }
