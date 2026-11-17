@@ -1,13 +1,15 @@
-﻿# Coptic culture, or any culture that diverged from or hybridized with it
+﻿# The Coptic culture: the game's own since CK3 1.21 (key remenkimi, shown as "Remenkhemi"), any culture
+# that keeps its Egyptian heritage (its divergences), and any culture formed directly from it (its hybrids).
+# Arab Egyptian (culture:egyptian) lists the Coptic culture as a parent in the game files but is not Coptic.
 coptic_culture_or_descendant_trigger = {
-	OR = {
-		culture = culture:coptic
-		culture = { any_parent_culture_or_above = { this = culture:coptic } }
+	culture = {
+		OR = {
+			has_cultural_pillar = heritage_egyptian
+			this = culture:remenkimi
+			AND = {
+				NOT = { this = culture:egyptian }
+				any_parent_culture = { this = culture:remenkimi }
+			}
+		}
 	}
-}
-
-# Vanilla Egyptian (Arabic) culture but a member of the Coptic Church (Coptic rite): a Copt
-coptic_church_egyptian_trigger = {
-	culture = culture:egyptian
-	rite = rite:coptic_rite
 }

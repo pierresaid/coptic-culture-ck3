@@ -2,18 +2,18 @@
 # Coptic MAA Values #
 ######################
 
-@high_maint_mult = 3
+@high_maint_mult = 2.5
 
-@archers_recruitment_cost = 55
-@archers_low_maint_cost = 0.2
+@archers_recruitment_cost = 20
+@archers_low_maint_cost = 0.3
 @archers_high_maint_cost = @[archers_low_maint_cost * high_maint_mult]
 
-@pikemen_recruitment_cost = 75
-@pikemen_low_maint_cost = 0.3
+@pikemen_recruitment_cost = 25
+@pikemen_low_maint_cost = 0.45
 @pikemen_high_maint_cost = @[pikemen_low_maint_cost * high_maint_mult]
 
-@heavy_infantry_recruitment_cost = 90
-@heavy_infantry_low_maint_cost = 0.4
+@heavy_infantry_recruitment_cost = 30
+@heavy_infantry_low_maint_cost = 0.6
 @heavy_infantry_high_maint_cost = @[heavy_infantry_low_maint_cost * high_maint_mult]
 
 coptic_spearmen_recruitment_cost = @[pikemen_recruitment_cost * 1.1]
@@ -24,7 +24,7 @@ coptic_archers_recruitment_cost = @[archers_recruitment_cost * 1.1]
 coptic_archers_low_maint_cost = @[archers_low_maint_cost * 1.1]
 coptic_archers_high_maint_cost = @[archers_high_maint_cost * 1.1]
 
-### Cultural MAA - Alexandrian Guard (1.4x heavy infantry base)
+### Cultural MAA - Alexandrian Guard (heavy infantry base: recruit x1.4, upkeep x1.19 = 1.4 less 15%)
 alexandrian_guard_recruitment_cost = @[heavy_infantry_recruitment_cost * 1.4]
-alexandrian_guard_low_maint_cost = @[heavy_infantry_low_maint_cost * 1.4]
-alexandrian_guard_high_maint_cost = @[heavy_infantry_high_maint_cost * 1.4]
+alexandrian_guard_low_maint_cost = @[heavy_infantry_low_maint_cost * 1.19]
+alexandrian_guard_high_maint_cost = @[heavy_infantry_high_maint_cost * 1.19]

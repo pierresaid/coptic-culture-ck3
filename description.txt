@@ -1,21 +1,18 @@
-This mod adds the Coptic culture to the game.
+Since update 1.21 the game has its own Coptic culture, called Remenkhemi.
+This mod no longer adds a separate culture: it adds Coptic flavor to the game's own.
 
-The culture has the Egyptian heritage, and the game starts with a few Coptic provinces in Egypt.
+What it adds:
+- Coptic place names in Egypt (Egypt is Kime, Alexandria is Rakote, and more)
+- Coptic ruler titles: Pouro (king), Tiouro (queen), Metouro (kingdom)
+- Three men-at-arms with their own paintings:
+  - Coptic Spearmen
+  - Coptic Archers
+  - Alexandrian Guard, heavy infantry (needs Household Soldiers)
+- Byzantine-style buildings instead of Arab ones
 
-Spiritual ethos.
-Culture traditions : 
-- Strong Believers
-- Agrarian
-- Monastic Communities
-- Expert Artisans
-
-The mod includes modified Coptic province and ruler names.
-
-Custom Men at Arms for Coptic culture :
-- Coptic Spearmen
-- Coptic Archers
-- Alexandrian Guard - Heavy Infantry (Need to unlock Household Soldiers first)
-
-You will have to use the ruler designer as there is no Coptic ruler in Egypt.
+Who to play:
+- In 1066, Kyril, Count of Siwa
+- With Silk & Silver, Coptic merchant families in Cairo, Alexandria and Kharga, at every start date
+- Or make your own Coptic ruler with the ruler designer
 
 Github : https://github.com/pierresaid/coptic-culture-ck3

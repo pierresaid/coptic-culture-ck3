@@ -27,6 +27,7 @@ coptic_spearmen = {
 	toughness = 26
 	pursuit = 0
 	screen = 10
+	control_value = 4
 
 	terrain_bonus = {
 		mountains = { toughness = 12 }
@@ -65,6 +66,7 @@ coptic_archers = {
 	toughness = 14
 	pursuit = 10
 	screen = 0
+	control_value = 2
 
 	terrain_bonus = {
 		hills = { damage = 10 toughness = 4 }
@@ -98,6 +100,7 @@ alexandrian_guard = {
 	toughness = 30
 	pursuit = 0
 	screen = 20
+	control_value = 6
 
 	terrain_bonus = {
 		desert = { damage = 6 toughness = 4 }

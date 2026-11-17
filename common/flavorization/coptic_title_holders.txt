@@ -5,7 +5,7 @@ king_feudal_male_coptic = {
 	special = holder
 	tier = kingdom
 	priority = 50
-	name_lists = { name_list_coptic }
+	name_lists = { name_list_remenkimi }
 	governments = { feudal_government clan_government tribal_government administrative_government }
 }
 king_feudal_female_coptic = {
@@ -14,13 +14,13 @@ king_feudal_female_coptic = {
 	special = holder
 	tier = kingdom
 	priority = 50
-	name_lists = { name_list_coptic }
+	name_lists = { name_list_remenkimi }
 	governments = { feudal_government clan_government tribal_government administrative_government }
 }
 kingdom_feudal_coptic = {
 	type = title
 	tier = kingdom
 	priority = 50
-	name_lists = { name_list_coptic }
+	name_lists = { name_list_remenkimi }
 	governments = { feudal_government clan_government tribal_government administrative_government }
 }

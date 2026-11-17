@@ -24,7 +24,7 @@ mx_coptic_arihoou = {
 	group = group_coptic_moodtrack
 }
 
-# Plays only for characters of Coptic culture (or a culture that diverged from or hybridized with it), whatever
+# Plays only for characters of the Coptic culture (or a culture that diverged from or hybridized with it), whatever
 # their faith (not for Egyptians of the Coptic rite)
 group_coptic_moodtrack = {
 	subsequent_playback_chance = { 0.9 0.6 }
