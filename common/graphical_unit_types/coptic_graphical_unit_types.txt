@@ -1,0 +1,6 @@
+﻿# The knights and accolade pictures are picked from the first unit_gfx key of a culture.
+# Coptic cultures now start with coptic_unit_gfx: this entry gives them pictures named coptic.dds
+# (for now copies of the vanilla "muslim" ones they already had).
+coptic = {
+	graphical_cultures = { coptic_unit_gfx }
+}
