@@ -9,6 +9,7 @@ What it adds:
   - Coptic Archers
   - Alexandrian Guard, heavy infantry (needs Household Soldiers)
 - Byzantine-style buildings instead of Arab ones
+- Custom models for Coptic armies
 
 Who to play:
 - In 1066, Kyril, Count of Siwa
