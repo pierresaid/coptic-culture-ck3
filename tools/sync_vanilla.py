@@ -3,6 +3,8 @@
 Since CK3 1.21 the game has its own Coptic culture (key remenkimi). The mod builds on it instead of adding a
 second one, and two mod files are copies of vanilla files with our changes on top:
   - common/landed_titles/coptic_title.txt    (vanilla k_egypt nested in its empire, plus the Coptic place names)
+  - common/buildings/holding_buildings/00_temple_buildings.txt  (replaces the vanilla file: one more entry per
+                                              temple level, so Coptic churches show the mod's own picture)
   - common/culture/cultures/00_egyptian.txt  (replaces the vanilla file of the same name: the vanilla Coptic
                                               culture with Byzantine buildings instead of Arab ones and
                                               the mod's own soldiers on the map, gfx/models/units)
@@ -36,9 +38,21 @@ KINGDOM = "k_egypt"
 CULTURE_KEY = "remenkimi"
 NAME_LIST = "name_list_remenkimi"
 # The two things the mod changes in the vanilla culture: (vanilla line, our line)
-BUILDINGS = ("\tbuilding_gfx = { mena_building_gfx }", "\tbuilding_gfx = { byzantine_building_gfx }")
+# Our own key comes first (it only carries the mod's holding pictures, see HOLDINGS), Byzantine buildings second:
+# the same way vanilla gives the Georgians "caucasian_building_gfx byzantine_building_gfx"
+BUILDINGS = ("\tbuilding_gfx = { mena_building_gfx }", "\tbuilding_gfx = { coptic_building_gfx byzantine_building_gfx }")
 # Our soldier models come first; fleets, siege engines and courts have no Coptic model and fall back on the Arab ones
 SOLDIERS = ("\tunit_gfx = { mena_unit_gfx }", "\tunit_gfx = { coptic_unit_gfx mena_unit_gfx }")
+
+# Holding pictures of our own. The game picks the picture (and the 3D building) of a holding from the "asset"
+# entries inside each holding building, so each of these vanilla files is copied with one more entry per level:
+# a copy of the entry Coptic counties in Egypt use today, for our building key, with our picture.
+#   vanilla file: (the faith look the entry is for, or None; our picture in PICTURES)
+HOLDING_KEY = "coptic_building_gfx"
+PICTURES = "gfx/interface/illustrations/holding_types"
+HOLDINGS = {
+    "common/buildings/holding_buildings/00_temple_buildings.txt": ("orthodox_gfx", "coptic_temple.dds"),
+}
 
 TITLES_PREAMBLE = """@correct_culture_primary_score = 100
 @better_than_the_alternatives_score = 50
@@ -160,6 +174,67 @@ def build_culture(game, version):
     return header + vanilla
 
 
+def brace_end(text, start):
+    """Index just after the brace that closes the block whose opening brace is at text[start]."""
+    depth = 0
+    for i in range(start, len(text)):
+        if text[i] == "{":
+            depth += 1
+        elif text[i] == "}":
+            depth -= 1
+            if depth == 0:
+                return i + 1
+    raise SyncError("unbalanced braces in a vanilla building file")
+
+
+def build_holding(rel):
+    """A vanilla holding buildings file with our picture added to every level (see HOLDINGS)."""
+    def build(game, version):
+        faith, picture = HOLDINGS[rel]
+        vanilla, _, _ = read_text(game / rel)
+        code = re.sub(r"#[^\n]*", lambda m: " " * len(m.group(0)), vanilla)      # same length, comments blanked
+        regions = []
+        for m in re.finditer(r"graphical_regions\s*=\s*\{([^}]*)\}", code):
+            for r in m.group(1).replace('"', " ").split():
+                if r not in regions:
+                    regions.append(r)
+        out, pos, added = [], 0, 0
+        for m in re.finditer(r"(?m)^\tassets\s*=\s*\{[^\n]*\n", code):
+            end = brace_end(code, m.start() + code[m.start():].index("{"))
+            ours = None
+            for a in re.finditer(r"(?m)^\t\tasset\s*=\s*\{", code[m.end():end]):
+                a0 = m.end() + a.start()
+                a1 = brace_end(code, a0 + code[a0:].index("{"))
+                block = code[a0:a1]
+                faiths = re.search(r"graphical_faiths\s*=\s*\{([^}]*)\}", block)
+                cultures = re.search(r"graphical_cultures\s*=\s*\{([^}]*)\}", block)
+                where = re.search(r"graphical_regions\s*=\s*\{([^}]*)\}", block)
+                if (cultures and "byzantine_building_gfx" in cultures.group(1) and where and "graphical_mena" in where.group(1)
+                        and "requires_dlc_flag" not in block and (bool(faiths) == bool(faith)) and (not faith or faith in faiths.group(1))):
+                    ours = block
+                    break
+            if ours is None:
+                raise SyncError(f"vanilla {rel}: no entry for Byzantine buildings in Egypt found in one of the levels; update this script")
+            ours = re.sub(r"graphical_cultures\s*=\s*\{[^}]*\}", f"graphical_cultures = {{ {HOLDING_KEY} }}", ours)
+            ours = re.sub(r"graphical_regions\s*=\s*\{[^}]*\}", "graphical_regions = { " + " ".join(regions) + " }", ours)
+            ours, n = re.subn(r"illustration\s*=\s*\S+", f'illustration = "{PICTURES}/{picture}"', ours)
+            if n != 1:
+                raise SyncError(f"vanilla {rel}: the entry copied for the Copts has no illustration line; update this script")
+            ours = "\n".join(line.rstrip() for line in ours.split("\n"))
+            out.append(vanilla[pos:m.end()])
+            out.append("\t\t# Coptic Culture mod: the picture of Coptic holdings (tools/sync_vanilla.py)\n" + ours + "\n\n")
+            pos = m.end()
+            added += 1
+        if not added:
+            raise SyncError(f"vanilla {rel} has no 'assets' blocks any more; update this script")
+        out.append(vanilla[pos:])
+        header = (f"# Generated by tools/sync_vanilla.py: replaces vanilla {rel} (CK3 {version}).\n"
+                  f"# The only change from vanilla: one more asset entry at the top of each of the {added} levels, for {HOLDING_KEY},\n"
+                  f"# with the mod's own picture {PICTURES}/{picture}\n")
+        return header + "".join(out)
+    return build
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--game", type=Path, default=Path(os.environ.get("CK3_GAME_DIR", DEFAULT_GAME)))
@@ -174,7 +249,7 @@ def main():
 
     changed = []
     try:
-        for rel, build in ((TITLES, build_titles), (CULTURE, build_culture)):
+        for rel, build in ((TITLES, build_titles), (CULTURE, build_culture), *((rel, build_holding(rel)) for rel in HOLDINGS)):
             path = MOD / rel
             _, bom, crlf = read_text(path) if path.is_file() else ("", True, False)
             new = encode(build(args.game, version), bom, crlf)
