@@ -1,0 +1,14 @@
+﻿# The flag of the kingdom of Egypt under a Coptic ruler: a dark red looped cross (the ankh turned into a
+# cross, the oldest Coptic sign) on gold. Put on the title by coptic_egypt_look_effect
+# (common/scripted_effects/coptic_effects.txt); under anyone else the kingdom keeps the game's own flag.
+k_egypt_coptic = {
+	pattern = "pattern_solid.dds"
+	color1 = "yellow"
+	color2 = "red_dark"
+	colored_emblem = {
+		texture = "ce_cross_coptic.dds"
+		color1 = "red_dark"
+		color2 = "red_dark"
+		instance = { position = { 0.5 0.47 } scale = { 0.78 0.78 }  }
+	}
+}

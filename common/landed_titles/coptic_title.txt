@@ -155,7 +155,7 @@ e_arabia = {
 				color = { 102 221 136 }
 
 				cultural_names = {
-					name_list_remenkimi = cn_coptic_rakote
+					name_list_remenkimi = cn_coptic_rakoti
 				}
 
 				#b_alexandria = {
@@ -165,7 +165,7 @@ e_arabia = {
 					province = 6053
 
 					cultural_names = {
-						name_list_remenkimi = cn_coptic_rakote
+						name_list_remenkimi = cn_coptic_rakoti
 					}
 
 					color = { 102 221 136 }
@@ -173,17 +173,13 @@ e_arabia = {
 				b_al-hamam = {
 					province = 6094
 
-					cultural_names = {
-						name_list_remenkimi = cn_coptic_heimo
-					}
-
 					color = { 102 221 136 }
 				}
 				b_wadi_natrun = {
 					province = 6116
 
 					cultural_names = {
-						name_list_remenkimi = cn_coptic_shehit
+						name_list_remenkimi = cn_coptic_shihet
 					}
 
 					color = { 102 221 136 }
@@ -224,10 +220,6 @@ e_arabia = {
 				b_qara = {
 					province = 6117
 
-					cultural_names = {
-						name_list_remenkimi = cn_coptic_kara
-					}
-
 					color = { 106 225 140 }
 				}
 			}
@@ -242,14 +234,14 @@ e_arabia = {
 				color = { 12 255 83 }
 
 				cultural_names = {
-					name_list_remenkimi = cn_coptic_dumiat
+					name_list_remenkimi = cn_coptic_tamiati
 				}
 
 				b_dumiyat = {
 					province = 6046
 
 					cultural_names = {
-						name_list_remenkimi = cn_coptic_dumiat
+						name_list_remenkimi = cn_coptic_tamiati
 					}
 
 					color = { 12 255 83 }
@@ -257,10 +249,18 @@ e_arabia = {
 				b_daqahla = {
 					province = 6043
 
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_tkehli
+					}
+
 					color = { 12 255 83 }
 				}
 				b_tinnis = {
 					province = 6045
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_thennesi
+					}
 
 					color = { 12 255 83 }
 				}
@@ -277,7 +277,7 @@ e_arabia = {
 					province = 6054
 
 					cultural_names = {
-						name_list_remenkimi = cn_coptic_timenhur
+						name_list_remenkimi = cn_coptic_timinhor
 					}
 
 					color = { 61 245 114 }
@@ -294,10 +294,18 @@ e_arabia = {
 				b_minuf = {
 					province = 6051
 
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_panouf
+					}
+
 					color = { 9 255 80 }
 				}
 				b_samannud = {
 					province = 6047
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_gemnouti
+					}
 
 					color = { 9 255 80 }
 				}
@@ -323,6 +331,10 @@ e_arabia = {
 				b_bilbays = {
 					province = 6040
 
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_phelbes
+					}
+
 					color = { 41 214 91 }
 				}
 				b_qalyub = {
@@ -341,30 +353,22 @@ e_arabia = {
 		d_cairo = {
 			color = { 32 245 138 }
 
-			cultural_names = {
-				name_list_remenkimi = cn_coptic_kashromi
-			}
-
 			capital = c_cairo
 
 			c_cairo = {
 				color = { 26 214 120 }
 
-				cultural_names = {
-					name_list_remenkimi = cn_coptic_kashromi
-				}
-
 				b_cairo = {
 					province = 6042
-
-					cultural_names = {
-						name_list_remenkimi = cn_coptic_kashromi
-					}
 
 					color = { 26 214 120 }
 				}
 				b_quzlum = {
 					province = 6039
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_klysma
+					}
 
 					color = { 26 214 120 }
 				}
@@ -386,16 +390,8 @@ e_arabia = {
 			c_giza = {
 				color = { 2 181 91 }
 
-				cultural_names = {
-					name_list_remenkimi = cn_coptic_tipersios
-				}
-
 				b_gizeh = {
 					province = 6057
-
-					cultural_names = {
-						name_list_remenkimi = cn_coptic_tipersios
-					}
 
 					color = { 2 181 91 }
 				}
@@ -446,13 +442,25 @@ e_arabia = {
 		d_al-wahat = {
 			color = { 40 160 140 }
 
+			cultural_names = {
+				name_list_remenkimi = cn_coptic_ouah
+			}
+
 			capital = c_bahriya
 
 			c_bahriya = {
 				color = { 45 165 145 }
 
+				cultural_names = {
+					name_list_remenkimi = cn_coptic_ouah_pemdje
+				}
+
 				b_al-bahriya = {
 					province = 6089
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_ouah_pemdje
+					}
 
 					color = { 45 165 145 }
 				}
@@ -470,16 +478,8 @@ e_arabia = {
 			c_farafra = {
 				color = { 34 148 129 }
 
-				cultural_names = {
-					name_list_remenkimi = cn_coptic_ferfer
-				}
-
 				b_al-farafra = {
 					province = 6088
-
-					cultural_names = {
-						name_list_remenkimi = cn_coptic_ferfer
-					}
 
 					color = { 34 148 129 }
 				}
@@ -507,24 +507,20 @@ e_arabia = {
 				color = { 39 219 126 }
 
 				cultural_names = {
-					name_list_remenkimi = cn_coptic_hib
+					name_list_remenkimi = cn_coptic_ouah_psoi
 				}
 
 				b_kharga = {
 					province = 6083
 
 					cultural_names = {
-						name_list_remenkimi = cn_coptic_hib
+						name_list_remenkimi = cn_coptic_heb
 					}
 
 					color = { 39 219 126 }
 				}
 				b_baris = {
 					province = 6084
-
-					cultural_names = {
-						name_list_remenkimi = cn_coptic_koush
-					}
 
 					color = { 39 219 126 }
 				}
@@ -533,6 +529,10 @@ e_arabia = {
 
 		d_al-said = {
 			color = { 85 217 87 }
+
+			cultural_names = {
+				name_list_remenkimi = cn_coptic_maris
+			}
 
 			capital = c_qus
 
@@ -555,10 +555,18 @@ e_arabia = {
 				b_huw = {
 					province = 6074
 
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_hou
+					}
+
 					color = { 76 194 77 }
 				}
 				b_faw = {
 					province = 6075
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_fvou
+					}
 
 					color = { 76 194 77 }
 				}
@@ -570,24 +578,44 @@ e_arabia = {
 				b_armant = {
 					province = 6078
 
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_ermont
+					}
+
 					color = { 76 194 77 }
 				}
 			}
 			c_bahnasa = {
 				color = { 50 173 51 }
 
+				cultural_names = {
+					name_list_remenkimi = cn_coptic_pemdje
+				}
+
 				b_al-bahnasa = {
 					province = 6063
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_pemdje
+					}
 
 					color = { 50 173 51 }
 				}
 				b_ahnas = {
 					province = 6062
 
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_hnes
+					}
+
 					color = { 50 173 51 }
 				}
 				b_ihrit = {
 					province = 6064
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_ehrit
+					}
 
 					color = { 50 173 51 }
 				}
@@ -595,13 +623,25 @@ e_arabia = {
 			c_ushmun = {
 				color = { 72 176 73 }
 
+				cultural_names = {
+					name_list_remenkimi = cn_coptic_shmoun
+				}
+
 				b_al-ushmunain = {
 					province = 6067
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_shmoun
+					}
 
 					color = { 72 176 73 }
 				}
 				b_ansina = {
 					province = 6068
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_antinoou
+					}
 
 					color = { 72 176 73 }
 				}
@@ -615,14 +655,14 @@ e_arabia = {
 				color = { 39 194 40 }
 
 				cultural_names = {
-					name_list_remenkimi = cn_coptic_siowt
+					name_list_remenkimi = cn_coptic_sioout
 				}
 
 				b_asyut = {
 					province = 6070
 
 					cultural_names = {
-						name_list_remenkimi = cn_coptic_siowt
+						name_list_remenkimi = cn_coptic_sioout
 					}
 
 					color = { 39 194 40 }
@@ -630,15 +670,27 @@ e_arabia = {
 				b_bawit = {
 					province = 6071
 
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_pauet
+					}
+
 					color = { 39 194 40 }
 				}
 				b_ikhmin = {
 					province = 6072
 
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_shmin
+					}
+
 					color = { 39 194 40 }
 				}
 				b_ibshaya = {
 					province = 6073
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_psoi
+					}
 
 					color = { 39 194 40 }
 				}
@@ -647,20 +699,24 @@ e_arabia = {
 				color = { 16 163 17 }
 
 				cultural_names = {
-					name_list_remenkimi = cn_coptic_swan
+					name_list_remenkimi = cn_coptic_souan
 				}
 
 				b_aswan = {
 					province = 6081
 
 					cultural_names = {
-						name_list_remenkimi = cn_coptic_swan
+						name_list_remenkimi = cn_coptic_souan
 					}
 
 					color = { 16 163 17 }
 				}
 				b_udfu = {
 					province = 6079
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_atbo
+					}
 
 					color = { 16 163 17 }
 				}
@@ -699,6 +755,10 @@ e_arabia = {
 			c_jabal_quzlum = {
 				color = { 45 195 130 }
 
+				cultural_names = {
+					name_list_remenkimi = cn_coptic_klismos
+				}
+
 				b_north_jbl_quzlum = {
 					province = 6118
 
@@ -735,14 +795,14 @@ e_arabia = {
 				color = { 141 198 5 }
 
 				cultural_names = {
-					name_list_remenkimi = cn_coptic_kasios
+					name_list_remenkimi = cn_coptic_peremoun
 				}
 
 				b_farama = {
 					province = 6038
 
 					cultural_names = {
-						name_list_remenkimi = cn_coptic_kasios
+						name_list_remenkimi = cn_coptic_peremoun
 					}
 
 					color = { 141 198 5 }
@@ -772,10 +832,6 @@ e_arabia = {
 				}
 				b_stcatherine = {
 					province = 6032
-
-					cultural_names = {
-						name_list_remenkimi = cn_coptic_agia_katrin
-					}
 
 					color = { 143 201 8 }
 				}

@@ -1,0 +1,77 @@
+﻿# The name, the colour and the flag of the kingdom of Egypt follow the culture of its ruler (coptic_egypt_look_effect):
+# checked when the game starts, when the kingdom changes hands and when its ruler changes culture.
+# Not on a timer: the player can pick his own name and colour in the title window, and they must stay.
+on_game_start_after_lobby = {
+	on_actions = { coptic_egypt_look_on_game_start }
+}
+
+on_title_gain = {
+	on_actions = { coptic_egypt_look_on_title_gain }
+}
+
+on_character_culture_change = {
+	on_actions = { coptic_egypt_look_on_culture_change }
+}
+
+coptic_egypt_look_on_game_start = {
+	effect = {
+		title:k_egypt = {
+			if = {
+				limit = { exists = holder }
+				holder = { coptic_egypt_look_effect = yes }
+			}
+		}
+		# A custom ruler (ruler designer): the game applies the realm name and colour of the designer's own
+		# "Realm" box after this moment, and that box is filled with the plain "Egypt" and the green.
+		# So for a Coptic player the look is applied again one day later. This restores the colour and the flag:
+		# the designer's name is stored as a name typed by hand, which no script can remove and which
+		# hides ours (checked in saves, CK3 1.21). The player has to type Kime himself, in the designer's
+		# Realm box or in the title window.
+		every_player = {
+			limit = {
+				culture = { has_name_list = name_list_remenkimi }
+				has_title = title:k_egypt
+			}
+			trigger_event = {
+				on_action = coptic_egypt_look_after_ruler_designer
+				days = 1
+			}
+		}
+	}
+}
+
+# root = the player
+coptic_egypt_look_after_ruler_designer = {
+	trigger = {
+		culture = { has_name_list = name_list_remenkimi }
+		has_title = title:k_egypt
+	}
+	effect = {
+		title:k_egypt = {
+			set_title_name = cn_coptic_kime
+			set_title_color = { 244 184 14 }
+			set_coa = k_egypt_coptic
+			set_variable = coptic_egypt_look
+		}
+	}
+}
+
+# root = the new holder, scope:title = the title
+coptic_egypt_look_on_title_gain = {
+	trigger = {
+		scope:title = title:k_egypt
+	}
+	effect = {
+		coptic_egypt_look_effect = yes
+	}
+}
+
+# root = the character whose culture changed
+coptic_egypt_look_on_culture_change = {
+	trigger = {
+		has_title = title:k_egypt
+	}
+	effect = {
+		coptic_egypt_look_effect = yes
+	}
+}

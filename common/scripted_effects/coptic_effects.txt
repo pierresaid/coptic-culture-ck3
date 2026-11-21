@@ -1,0 +1,33 @@
+﻿# The kingdom of Egypt under a Coptic ruler: named Kime, bright gold on the map, with its own flag
+# (k_egypt_coptic, common/coat_of_arms). Under anyone else: the game's own name, green and flag. Run on the ruler who holds the kingdom.
+# It acts only when the kingdom passes between a Coptic and a non-Coptic ruler (the mark on the title remembers
+# which look it carries), so a name or a colour the player picks himself in the title window is kept.
+# The name is set by hand because a realm that was named after its ruler's house (the Tulunids) keeps the plain
+# name "Egypt" stamped on it by the game when it changes hands, and that stamp hides the title's Coptic name.
+# (The green is the colour of k_egypt in the game's landed titles; tools/sync_vanilla.py checks it is still that.)
+coptic_egypt_look_effect = {
+	if = {
+		limit = {
+			culture = { has_name_list = name_list_remenkimi }
+			NOT = { title:k_egypt = { has_variable = coptic_egypt_look } }
+		}
+		title:k_egypt = {
+			set_title_name = cn_coptic_kime
+			set_title_color = { 244 184 14 }
+			set_coa = k_egypt_coptic
+			set_variable = coptic_egypt_look
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = { culture = { has_name_list = name_list_remenkimi } }
+			title:k_egypt = { has_variable = coptic_egypt_look }
+		}
+		title:k_egypt = {
+			reset_title_name = yes
+			set_title_color = { 10 255 80 }
+			set_coa = k_egypt
+			remove_variable = coptic_egypt_look
+		}
+	}
+}

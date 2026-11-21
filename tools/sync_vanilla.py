@@ -38,6 +38,9 @@ CULTURE = "common/culture/cultures/00_egyptian.txt"
 KINGDOM = "k_egypt"
 CULTURE_KEY = "remenkimi"
 NAME_LIST = "name_list_remenkimi"
+# The kingdom's vanilla colour on the map. Under a Coptic ruler the mod repaints it bright gold, and back to this
+# colour under anyone else (common/scripted_effects/coptic_effects.txt, which repeats these numbers).
+KINGDOM_COLOR = "\t\tcolor = { 10 255 80 }"
 # The two things the mod changes in the vanilla culture: (vanilla line, our line)
 BUILDINGS = ("\tbuilding_gfx = { mena_building_gfx }", "\tbuilding_gfx = { byzantine_building_gfx }")
 # Our soldier models come first; fleets, siege engines and courts have no Coptic model and fall back on the Arab ones
@@ -157,6 +160,9 @@ def build_titles(game, version):
     missing = sorted(set(names) - done)
     if missing:
         raise SyncError(f"titles with Coptic names not found in vanilla {KINGDOM}: {', '.join(missing)}")
+    if out[1] != KINGDOM_COLOR:
+        raise SyncError(f"vanilla {KINGDOM} no longer starts with '{KINGDOM_COLOR.strip()}'; update this script "
+                        "and the colour in common/scripted_effects/coptic_effects.txt")
 
     preamble = TITLES_PREAMBLE.format(version=version, kingdom=KINGDOM, empire=empire)
     return preamble + "\n" + "\n".join(header) + "\n\n" + "\n".join(out) + "\n}\n"
