@@ -390,8 +390,16 @@ e_arabia = {
 			c_giza = {
 				color = { 2 181 91 }
 
+				cultural_names = {
+					name_list_remenkimi = cn_coptic_tipersis
+				}
+
 				b_gizeh = {
 					province = 6057
+
+					cultural_names = {
+						name_list_remenkimi = cn_coptic_tipersis
+					}
 
 					color = { 2 181 91 }
 				}
