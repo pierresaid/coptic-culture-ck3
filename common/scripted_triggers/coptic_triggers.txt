@@ -13,3 +13,15 @@ coptic_culture_or_descendant_trigger = {
 		}
 	}
 }
+
+# A county of Egypt proper: the kingdom of Egypt without Cyrenaica, which was never Coptic land.
+coptic_county_of_egypt_trigger = {
+	kingdom ?= title:k_egypt
+	NOT = { duchy ?= title:d_cyrenaica }
+}
+
+# A county of Egypt proper whose people speak Arabic.
+coptic_arabic_county_of_egypt_trigger = {
+	culture = { has_cultural_pillar = language_arabic }
+	coptic_county_of_egypt_trigger = yes
+}

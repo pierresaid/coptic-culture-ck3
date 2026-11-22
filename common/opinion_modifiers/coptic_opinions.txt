@@ -1,0 +1,4 @@
+﻿# Arabic-speaking vassals of a ruler who took the decision "Revive the Coptic Tongue".
+coptic_tongue_revival_opinion = {
+	opinion = -20
+}

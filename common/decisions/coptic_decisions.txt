@@ -1,0 +1,129 @@
+﻿# Revive the Coptic tongue: once per game, for a Coptic ruler of Kime whose realm holds Arabic-speaking counties of Egypt.
+coptic_revive_tongue_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_culture.dds"
+	}
+	decision_group_type = major
+	sort_order = 100
+
+	ai_check_interval_by_tier = {
+		barony = 0
+		county = 0
+		duchy = 0
+		kingdom = 60
+		empire = 60
+		hegemony = 0
+	}
+
+	title = coptic_revive_tongue_decision
+	desc = coptic_revive_tongue_decision_desc
+	selection_tooltip = coptic_revive_tongue_decision_tooltip
+	confirm_text = coptic_revive_tongue_decision_confirm
+
+	# Hidden unless all of this is true (cheapest checks first)
+	is_shown = {
+		NOT = { has_global_variable = coptic_tongue_revived }
+		has_title = title:k_egypt
+		coptic_culture_or_descendant_trigger = yes
+		is_playable_character = yes
+		any_sub_realm_county = {
+			count >= 5
+			coptic_arabic_county_of_egypt_trigger = yes
+		}
+	}
+
+	# Shown but greyed out until this is true
+	is_valid = {
+		custom_tooltip = {
+			text = coptic_revive_tongue_alexandria_realm_tt
+			title:c_alexandria.holder ?= {
+				OR = {
+					this = root
+					any_liege_or_above = { this = root }
+				}
+			}
+		}
+		custom_tooltip = {
+			text = coptic_revive_tongue_alexandria_coptic_tt
+			title:c_alexandria.holder ?= { coptic_culture_or_descendant_trigger = yes }
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+	}
+
+	cost = {
+		prestige = 500
+		piety = 250
+	}
+
+	effect = {
+		set_global_variable = {
+			name = coptic_tongue_revived
+			value = root
+		}
+		# Alexandria turns Coptic at once (first, so it then gets the prosperity bonus instead of the conversion one)
+		title:c_alexandria = {
+			if = {
+				limit = {
+					NOT = { coptic_culture_or_descendant_trigger = yes }
+				}
+				set_county_culture = root.culture
+			}
+		}
+		# Faster conversion of the Arabic-speaking counties (they open the steward task task_coptic_revive_tongue, common/council_tasks/coptic_council_tasks.txt)
+		custom_tooltip = coptic_revive_tongue_conversion_tt
+		hidden_effect = {
+			every_sub_realm_county = {
+				limit = { coptic_arabic_county_of_egypt_trigger = yes }
+				add_county_modifier = {
+					modifier = coptic_tongue_revival_modifier
+					years = 20
+				}
+			}
+		}
+		# Prosperity for the Coptic counties
+		custom_tooltip = coptic_revive_tongue_prosperity_tt
+		hidden_effect = {
+			every_sub_realm_county = {
+				limit = {
+					coptic_county_of_egypt_trigger = yes
+					coptic_culture_or_descendant_trigger = yes
+				}
+				add_county_modifier = {
+					modifier = coptic_tongue_revival_prosperity_modifier
+					years = 20
+				}
+			}
+		}
+		# Arabic-speaking vassals resent it
+		every_vassal = {
+			limit = { culture = { has_cultural_pillar = language_arabic } }
+			add_opinion = {
+				target = root
+				modifier = coptic_tongue_revival_opinion
+				years = 10
+			}
+		}
+		# The Church rejoices
+		if = {
+			limit = { religion = religion:christianity_religion }
+			faith = {
+				change_fervor = {
+					value = major_fervor_gain
+					desc = coptic_revive_tongue_fervor_desc
+				}
+			}
+		}
+	}
+
+	ai_potential = {
+		coptic_culture_or_descendant_trigger = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}

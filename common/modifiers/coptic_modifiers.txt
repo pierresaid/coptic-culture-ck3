@@ -1,0 +1,13 @@
+﻿# Set by the decision "Revive the Coptic Tongue" (common/decisions/coptic_decisions.txt) for 20 years.
+
+# Arabic-speaking counties of Egypt: a Coptic steward can work there on the task "Revive the Coptic Tongue",
+# Promote Culture at 2x speed (common/council_tasks/coptic_council_tasks.txt).
+coptic_tongue_revival_modifier = {
+	icon = learning_positive
+}
+
+# Coptic counties of Egypt: faster prosperity growth.
+coptic_tongue_revival_prosperity_modifier = {
+	icon = county_modifier_prosperity_positive
+	prosperity_growth_factor = large_prosperity_growth_gain
+}

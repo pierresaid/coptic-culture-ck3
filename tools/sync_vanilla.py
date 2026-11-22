@@ -1,7 +1,7 @@
 """Re-sync the mod's copies of vanilla files with the installed CK3 version.
 
 Since CK3 1.21 the game has its own Coptic culture (key remenkimi). The mod builds on it instead of adding a
-second one, and three mod files are copies of vanilla files with our changes on top:
+second one, and four mod files are copies of vanilla files with our changes on top:
   - common/landed_titles/coptic_title.txt    (vanilla k_egypt nested in its empire, plus the Coptic place names)
   - common/culture/name_lists/00_egyptian.txt  (replaces the vanilla file of the same name: the vanilla Coptic
                                               name list, with realms no longer named after the ruling house
@@ -9,6 +9,10 @@ second one, and three mod files are copies of vanilla files with our changes on 
   - common/culture/cultures/00_egyptian.txt  (replaces the vanilla file of the same name: the vanilla Coptic
                                               culture with Byzantine buildings instead of Arab ones and
                                               the mod's own soldiers on the map, gfx/models/units)
+  - common/council_tasks/coptic_council_tasks.txt  (a NEW steward task built from the vanilla task_promote_culture,
+                                              nothing of vanilla is overridden: "Revive the Coptic Tongue",
+                                              2x as fast, shown only while the decision of the same name
+                                              is in effect, in counties with the Coptic Revival modifier)
 
 The Coptic place names are read from the current mod file, so the mod file stays the source of truth:
 add a name there (name_list_remenkimi = cn_...), then run this script after each game patch.
@@ -76,6 +80,42 @@ TITLES_PREAMBLE = """@correct_culture_primary_score = 100
 
 class SyncError(Exception):
     pass
+
+
+TASK = "common/council_tasks/coptic_council_tasks.txt"
+TASK_VANILLA = "common/council_tasks/00_steward_tasks.txt"
+TASK_FROM, TASK_KEY = "task_promote_culture", "task_coptic_revive_tongue"
+TASK_SHOWN = """		# Coptic Culture mod: only while the decision "Revive the Coptic Tongue" is in effect in the realm
+		scope:councillor_liege = {
+			coptic_culture_or_descendant_trigger = yes
+			any_sub_realm_county = { has_county_modifier = coptic_tongue_revival_modifier }
+		}
+"""
+TASK_COUNTIES = """	potential_county = {
+		scope:county = {
+			is_landless_type_title = no
+			culture != scope:councillor_liege.culture
+			# own text: the game has no "does not have this county modifier" wording for this tooltip
+			custom_tooltip = {
+				text = coptic_tongue_revival_county_tt
+				has_county_modifier = coptic_tongue_revival_modifier
+			}
+		}
+	}
+"""
+TASK_SPEED = """		multiply = {
+			value = 2
+			desc = COPTIC_REVIVAL_PROMOTE_CULTURE_BONUS
+		}
+"""
+TASK_AI = """	ai_will_do = {
+		value = 0
+	}
+"""
+TASK_CONVERT = "\t\t\tset_county_culture = scope:councillor_liege.culture\n"
+# our own icon: Coptic alpha and zita on the steward ring (made in work/coptic-3d-tools/task_icon)
+TASK_ICON = ('icon = "gfx/interface/icons/council_task_types/task_promote_culture.dds"',
+             'icon = "gfx/interface/icons/council_task_types/task_coptic_revive_tongue.dds"')
 
 
 def read_text(path):
@@ -208,6 +248,48 @@ def build_names(game, version):
     return header + text
 
 
+def replace_section(block, name, new):
+    """Replace the top-level section `name = { ... }` of a council task block."""
+    m = re.search(rf"(?m)^\t{name} = \{{\n", block)
+    if not m:
+        raise SyncError(f"vanilla {TASK_FROM} has no '{name}' section any more; update this script")
+    lines = block[:m.start()].count("\n")
+    all_lines = block.split("\n")
+    stop = block_end(all_lines, lines, "\t")
+    return "\n".join(all_lines[:lines]) + "\n" + new + "\n".join(all_lines[stop + 1:])
+
+
+def build_task(game, version):
+    """A new steward task: the vanilla Promote Culture task, twice as fast, only in Coptic Revival counties."""
+    vanilla, _, _ = read_text(game / TASK_VANILLA)
+    m = re.search(rf"(?ms)^{TASK_FROM} = \{{\n.*?^\}}\n", vanilla)
+    if not m:
+        raise SyncError(f"vanilla {TASK_VANILLA} has no '{TASK_FROM}' any more; update this script")
+    block = TASK_KEY + m.group(0)[len(TASK_FROM):]
+    if block.count("\tis_shown = {\n") != 1 or block.count(TASK_CONVERT) != 1 or block.count(TASK_ICON[0]) != 1:
+        raise SyncError(f"vanilla {TASK_FROM} changed shape (is_shown, set_county_culture or icon); update this script")
+    block = block.replace(*TASK_ICON)
+    block = block.replace("\tis_shown = {\n", "\tis_shown = {\n" + TASK_SHOWN, 1)
+    block = replace_section(block, "potential_county", TASK_COUNTIES)
+    block = replace_section(block, "ai_will_do", TASK_AI)
+    # the speed: multiply the whole vanilla progress at its very end
+    lines = block.split("\n")
+    i = lines.index("\tprogress = {")
+    stop = block_end(lines, i, "\t")
+    block = "\n".join(lines[:stop]) + "\n" + TASK_SPEED + "\n".join(lines[stop:])
+    # a converted county no longer needs the marker
+    block = block.replace(TASK_CONVERT, TASK_CONVERT + "\t\t\tremove_county_modifier = coptic_tongue_revival_modifier\n")
+    header = (f"# Generated by tools/sync_vanilla.py from {TASK_FROM} in {TASK_VANILLA} (CK3 {version}).\n"
+              f"# A new task, {TASK_KEY}; vanilla is not overridden. Changes from the vanilla task:\n"
+              "#   is_shown: also needs a Coptic liege with a Coptic Revival county (decision \"Revive the Coptic Tongue\")\n"
+              "#   potential_county: only counties with the Coptic Revival modifier and another culture\n"
+              "#   progress: x2 at the end\n"
+              "#   on finish: also removes the Coptic Revival modifier\n"
+              "#   ai_will_do: 0 (the AI does not use it)\n"
+              "#   icon: our own (Coptic alpha and zita)\n")
+    return header + block
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--game", type=Path, default=Path(os.environ.get("CK3_GAME_DIR", DEFAULT_GAME)))
@@ -222,7 +304,8 @@ def main():
 
     changed = []
     try:
-        for rel, build in ((TITLES, build_titles), (CULTURE, build_culture), (NAMES, build_names)):
+        for rel, build in ((TITLES, build_titles), (CULTURE, build_culture), (NAMES, build_names),
+                           (TASK, build_task)):
             path = MOD / rel
             _, bom, crlf = read_text(path) if path.is_file() else ("", True, False)
             new = encode(build(args.game, version), bom, crlf)
