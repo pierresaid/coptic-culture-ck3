@@ -4,16 +4,21 @@ This mod no longer adds a separate culture: it adds Coptic flavor to the game's 
 What it adds:
 - Coptic place names in Egypt (Egypt is Kime, Alexandria is Rakote, and more)
 - Coptic ruler titles: Pouro (king), Tiouro (queen), Metouro (kingdom)
+- More Coptic first names
+- Custom models for Coptic armies
 - Three men-at-arms with their own paintings:
   - Coptic Spearmen
   - Coptic Archers
   - Alexandrian Guard, heavy infantry (needs Household Soldiers)
 - Byzantine-style buildings instead of Arab ones
-- Custom models for Coptic armies
+- Knights, accolade and levies pictures
 
 Who to play:
+- Make your own Coptic ruler with the ruler designer
+Or vanilla characters :
 - In 1066, Kyril, Count of Siwa
 - With Silk & Silver, Coptic merchant families in Cairo, Alexandria and Kharga, at every start date
-- Or make your own Coptic ruler with the ruler designer
+
+Ethnicities & Portraits Expanded Compatibility Patch : https://steamcommunity.com/sharedfiles/filedetails/?id=3845313524
 
 Github : https://github.com/pierresaid/coptic-culture-ck3
