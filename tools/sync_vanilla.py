@@ -5,7 +5,7 @@ second one, and four mod files are copies of vanilla files with our changes on t
   - common/landed_titles/coptic_title.txt    (vanilla k_egypt nested in its empire, plus the Coptic place names)
   - common/culture/name_lists/00_egyptian.txt  (replaces the vanilla file of the same name: the vanilla Coptic
                                               name list, with realms no longer named after the ruling house
-                                              and the mod's family names added)
+                                              and the mod's family names and first names)
   - common/culture/cultures/00_egyptian.txt  (replaces the vanilla file of the same name: the vanilla Coptic
                                               culture with Byzantine buildings instead of Arab ones and
                                               the mod's own soldiers on the map, gfx/models/units)
@@ -61,7 +61,7 @@ BUILDINGS = ("\tbuilding_gfx = { mena_building_gfx }", "\tbuilding_gfx = { byzan
 # Our soldier models come first; fleets, siege engines and courts have no Coptic model and fall back on the Arab ones
 SOLDIERS = ("\tunit_gfx = { mena_unit_gfx }", "\tunit_gfx = { coptic_unit_gfx mena_unit_gfx }")
 
-# The vanilla name list of the Coptic culture, with two changes.
+# The vanilla name list of the Coptic culture, with three changes.
 NAMES = "common/culture/name_lists/00_egyptian.txt"
 # 1. Vanilla shows the realm of a Coptic ruler under his house's name ("...id"), like Arab realms. Then the
 #    kingdom of Egypt never shows its Coptic name (Kime) for the very ruler who holds it: turned off.
@@ -75,6 +75,32 @@ HOUSE_NAMING = ("\thouse_based_map_names = yes", "\thouse_based_map_names = no")
 #    modern surnames (Haroun, Zaia, Bayomi, Quolta), Ruweis (14th century) and Kazzazi (source not found).
 FAMILIES = ("Fayyumi", "Dumyati", "Iskandari", "Fustati", "Aswani", "Nasturusi", "Fahdi", "Turayk", "Apion", "Bashmur",
             "Shenouti", "Paphnoutios", "Barsanouphios", "Merkourios", "Amoun")
+# 3. First names: the mod's own lists replace the vanilla ones (picked by hand from sourced research, 2026-11-24).
+#    Names with no text in the game have one in localization/english/names/coptic_character_names_l_english.yml.
+MALE_NAMES = """
+Abib Abraam Agathon Alexandros Ammonios Amoun Ananias Anastasios Andreas Andronikos Anoub Antonios Apahor Apakir
+Apamoun Apanoub Apaskhiron Apater Apollo Arsenios Athanasios Athom Azarias Barsoum Basileios Benjamin Besa
+Christodolos Damianos Demetrios Dionysios Dioskoros Efrem Epiphanios Girgis Harwaj Hedra Heraklas Hor Horsiese
+Isaak Isidoros Jori Karas Kellouj Klaudios Kosmas Kyriakos Kyril Lazaros Makarios Mareten Markos Matta Maximos
+Mercorios Mikhail Mina Misael Nahrou Ouini Pakhom Palamon Pambo Pamoun Papnoute Patape Patermoute Paulos Payom
+Petros Phib Philopater Philotheos Phoibammon Pijimi Pijoul Pikhit Pimoui Pirou Pisentios Pishai Pishenoufi
+Pishoy Pisoura Poimen Psote Ptolemaios Sarapamon Serapion Severos Shenouda Shenousi Shosi Simeon Stephanos
+Tadros Teji Theodosios Theonas Theophanes Theophilos Timotheos Touma Wanas Wenofer Yakobos Yohannes Yostos
+Zacharias
+""".split()
+FEMALE_NAMES = """
+Abigaia Agape Amuna Anasimon Anastasia Anna Apollonia Arsima Asenneth Athanasia Barbara Basin Charisia
+Christodoula Darkun Dimiana Dorothea Eirene Elisabeth Eratee Esther Eudoxia Eugenia Euphemia Euphrosyne Febronia
+Hanna Helene Helpis Hilaria Hirai Hoeite Jemmahor Juliana Justina Kalisthene Katharon Katherine Khnau Khreere
+Kleopatra Koloje Lia Loule Makrina Maria Mariam Marina Martha Matruna Mouji Pelagia Pia Pistis Potamiana Rebekka
+Salome Sara Shoshen Sinklitika Sophia Sousanna Tabitha Tachel Taese Tagape Taham Tahor Taloushem Tapshai Tasia
+Telogya Termoute Thekla Thello Theodora Theognosta Theopista Tsanna Tshenoute Tsia Tsibla Tsone Tusanah Uradaa
+Verena Veronika Youna Zoe
+""".split()
+# Vanilla names left out on purpose: respelled with the Coptic "p" (Bishoy is Pishoy...), doubles of another name
+# (Pshoi = Pishoy, Khail = Mikhail, Damiana = Dimiana) or not picked (Moussa). Any OTHER vanilla name missing from
+# our lists stops the script, so names a patch adds are never lost silently.
+LEFT_OUT = {"Abanoub", "Bakhum", "Bishoy", "Boutros", "Sarabamon", "Pshoi", "Khail", "Moussa", "Damiana"}
 
 TITLES_PREAMBLE = """@correct_culture_primary_score = 100
 @better_than_the_alternatives_score = 50
@@ -273,9 +299,21 @@ def build_names(game, version):
         have = set(re.findall(r'"dynn_([^"]+)"', m.group(1)))
         ours = "".join(f'\t\t"dynn_{n}"\n' for n in FAMILIES if n not in have)
         text = text[:m.end(1)] + ours + text[m.end(1):]
+    for block, names in (("male_names", MALE_NAMES), ("female_names", FEMALE_NAMES)):
+        m = re.search(rf"(?m)^\t{block} = \{{\n(.*?)^\t\}}\n", text, flags=re.S)
+        if not m:
+            raise SyncError(f"vanilla {NAMES} has no '{block}' list any more; update this script")
+        lost = sorted(set(m.group(1).split()) - set(names) - LEFT_OUT)
+        if lost:
+            raise SyncError(f"vanilla {block} has names that are in neither our list nor LEFT_OUT: {', '.join(lost)}")
+        rows = {}
+        for n in sorted(names):
+            rows.setdefault(n[0], []).append(n)
+        text = text[:m.start(1)] + "".join(f"\t\t{' '.join(r)}\n" for r in rows.values()) + text[m.end(1):]
     header = (f"# Generated by tools/sync_vanilla.py: replaces vanilla {NAMES} (CK3 {version}).\n# Changes from vanilla:\n"
               f"#   {new.strip()}   (vanilla: {old.strip()}), so the kingdom of Egypt keeps its Coptic name under a Coptic ruler\n"
-              f"#   {len(FAMILIES)} family names of the mod added after the vanilla ones in both lists\n")
+              f"#   {len(FAMILIES)} family names of the mod added after the vanilla ones in both lists\n"
+              f"#   the mod's own first names ({len(MALE_NAMES)} male, {len(FEMALE_NAMES)} female) instead of the vanilla ones\n")
     return header + text
 
 
