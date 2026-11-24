@@ -1,0 +1,9 @@
+Compatibility patch between [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2351778889]Coptic Culture[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2507209632]Ethnicities and Portraits Expanded[/url].
+
+[b]Load order[/b]
+[list]
+[*]Ethnicities and Portraits Expanded
+[*]Coptic Culture
+[*]Coptic Culture - EPE Compatch (this mod, last)
+[/list]
+
